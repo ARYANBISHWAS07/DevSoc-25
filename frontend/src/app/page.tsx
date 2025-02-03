@@ -1,10 +1,5 @@
-import Image from "next/image";
-import Parallax from "./LandingPage/mainLandingPage";
+import Main from "@/app/Main/page";
 
 export default function Home() {
-  return (
-
-      <Parallax/>
-
-  );
+  return <Main />;
 }
