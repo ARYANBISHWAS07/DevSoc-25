@@ -39,22 +39,21 @@ const StepsProgress: React.FC = () => {
     return () => clearInterval(timer);
   }, [isPlaying]);
 
-  // Progress Bar Component
   const ProgressBar = ({ position }: { position: "left" | "right" }) => (
-    <div className="hidden md:flex flex-col items-center w-2">
-      <div className="h-2 w-2 bg-gray-200 rounded-full relative">
+    <div className="hidden md:hidden md:flex flex-col items-center w-12 md:w-24 lg:w-2">
+      <div className="h-48 md:h-96 lg:h-2 w-4 md:w-6 lg:w-2 bg-gray-200 rounded-full relative">
         <div
-          className="absolute top-0 w-8 bg-gradient-to-b from-blue-400 to-indigo-600 rounded-full transition-all duration-700 ease-in-out"
+          className="absolute top-0 w-full bg-gradient-to-b from-blue-400 to-indigo-600 rounded-full transition-all duration-700 ease-in-out"
           style={{ height: `${progressValue}%` }}
         />
         {STEPS.map((stepItem) => (
           <div
             key={stepItem.id}
-            className={`absolute flex items-center ${position === "left" ? "-left-16" : "-right-16"}`}
+            className={`absolute flex items-center ${position === "left" ? "-left-8 md:-left-12 lg:-left-16" : "-right-8 md:-right-12 lg:-right-16"}`}
             style={{ top: `${((stepItem.id - 1) / (STEPS.length - 1)) * 100}%` }}
           >
             <div
-              className={`w-2 h-2 rounded-full transition-all duration-500 ${
+              className={`w-4 h-4 md:w-5 md:h-5 lg:w-2 lg:h-2 rounded-full transition-all duration-500 ${
                 step >= stepItem.id ? "bg-indigo-600" : "bg-gray-300"
               } ${step === stepItem.id ? "scale-150" : "scale-100"}`}
             />
@@ -64,56 +63,50 @@ const StepsProgress: React.FC = () => {
     </div>
   );
 
-  // Define different content for each carousel item
   const carouselItems = [
-    <div key="item1" className="p-2 h-full flex flex-col items-center justify-center">
-      <div className="max-w-xs">
-        <img 
-          src="/api/placeholder/300/200" 
-          alt="Extension" 
-          className="w-full h-auto object-cover"
-        />
+    <div key="item1" className="p-4 h-full flex flex-col items-center justify-center">
+      <div className="max-w-xs md:max-w-md">
+        <Image src={Extension} alt="Extension" layout="responsive"/>
       </div>
-      <h2 className="text-xl md:text-2xl font-bold mb-2">Carousel Item 1</h2>
-      <p className="text-sm md:text-base text-center">First custom content block.</p>
+      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 md:mb-4">Carousel Item 1</h2>
+      <p className="text-base md:text-xl text-center">This is the first custom content block.</p>
     </div>,
-    <div key="item2" className="p-2 h-full flex flex-col items-center justify-center">
-      <h2 className="text-xl md:text-2xl font-bold mb-2">Carousel Item 2</h2>
-      <p className="text-sm md:text-base text-center">Second custom content block.</p>
-    </div>,
-    <div key="item3" className="p-2 h-full flex flex-col items-center justify-center">
-      <h2 className="text-xl md:text-2xl font-bold mb-2">Carousel Item 3</h2>
-      <p className="text-sm md:text-base text-center">Third custom content block.</p>
-    </div>
+    // Similar responsive adjustments for other carousel items
+    ...Array(4).fill(null).map((_, index) => (
+      <div key={`item${index + 2}`} className="p-4 h-full flex flex-col items-center justify-center">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 md:mb-4">Carousel Item {index + 2}</h2>
+        <p className="text-base md:text-xl text-center">This is the {index + 2} custom content block.</p>
+      </div>
+    ))
   ];
 
   return (
-    <div className="flex flex-col md:flex-row h-auto w-full p-2 md:p-4 justify-center items-center gap-2 md:gap-4">
+    <div className="flex flex-col md:flex-row h-auto md:h-screen w-full p-4 md:p-12 mt-0 md:mt-16 justify-center items-center gap-4 md:gap-8 lg:gap-16">
       <ProgressBar position="left" />
 
-      <div className="flex flex-col w-full max-w-full md:max-w-md">
+      <div className="flex flex-col w-full md:flex-1 md:min-w-[500px] lg:min-w-[750px]">
         {STEPS.map((stepItem) => (
           <div
             key={stepItem.id}
-            className="flex items-center mb-2 md:mb-4 transition-all duration-500"
+            className="mb-4 md:mb-8 lg:mb-2 md:mb-4 transition-all duration-500"
             style={{
-              transform: step === stepItem.id ? "scale(1.02)" : "scale(1)",
+              transform: step === stepItem.id ? "scale(1.02) md:scale(1.05)" : "scale(1)",
               opacity: step === stepItem.id ? 1 : 0.7,
             }}
           >
             <Card
-              className={`w-full shadow-md border-2 transition-all ${
+              className={`w-full shadow-xl border-2 md:border-4 transition-all ${
                 step === stepItem.id
                   ? "border-indigo-600 shadow-blue-100"
                   : "border-blue-400"
               }`}
             >
-              <div className="flex flex-row items-center p-2 md:p-4">
-                <div className="flex-shrink-0 w-16 flex justify-center mr-2 md:mr-4">
+              <div className="flex flex-row items-center p-4 md:p-8 lg:p-2 md:p-4">
+                <div className="flex-shrink-0 w-20 md:w-40 lg:w-16 flex justify-center mr-2 md:mr-4 mr-4 md:mr-8">
                   <div
-                    className={`w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-all duration-500 text-base md:text-xl ${
+                    className={`w-12 h-12 md:w-16 md:h-16 lg:w-10 lg:h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-all duration-500 text-xl md:text-2xl lg:text-base md:text-xl ${
                       step >= stepItem.id
-                        ? "bg-indigo-600 text-white ring-2 ring-blue-200"
+                        ? "bg-indigo-600 text-white ring-2 md:ring-2 ring-blue-200"
                         : "bg-gray-200 text-gray-600"
                     }`}
                   >
@@ -122,13 +115,13 @@ const StepsProgress: React.FC = () => {
                 </div>
                 <div className="flex-1">
                   <h3
-                    className={`text-base md:text-xl font-bold transition-colors duration-300 ${
+                    className={`text-xl md:text-3xl lg:text-4xl font-bold transition-colors duration-300 ${
                       step === stepItem.id ? "text-blue-800" : "text-gray-900"
                     }`}
                   >
                     {stepItem.title}
                   </h3>
-                  <p className="text-xs md:text-sm text-slate-800">
+                  <p className="text-base md:text-xl lg:text-2xl text-slate-800 mt-2 md:mt-4">
                     {stepItem.description}
                   </p>
                 </div>
@@ -140,13 +133,14 @@ const StepsProgress: React.FC = () => {
 
       <ProgressBar position="right" />
 
-      <div className="w-full max-w-xs md:max-w-sm">
+      <div className="w-full max-w-xs md:max-w-md lg:max-w-lg mt-4 md:mt-0">
         <Carousel className="w-full">
           <CarouselContent
-            className="h-[200px] md:h-[300px] transition-transform duration-700 ease-in-out"
+            className="h-64 md:h-[500px] lg:h-[800px] transition-transform duration-700 ease-in-out overflow-hidden"
             style={{ transform: `translateX(-${carouselIndex * 100}%)` }}
           >
             {carouselItems.map((item) => (
+              <CarouselItem key={(item as any).key} className="w-full">
               <CarouselItem key={(item as any).key} className="w-full">
                 {item}
               </CarouselItem>
