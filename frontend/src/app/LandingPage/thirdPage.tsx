@@ -1,155 +1,142 @@
 "use client";
-import Extension from "../../../public/extension.png";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-
+import Extension from "../../../public/extension.png";
+import Font from "../../../public/Frame.svg"
+import meet from "../../../public/hello.svg"
 interface Step {
   id: number;
   title: string;
   description: string;
+  image?: any; // Allow custom images per step if needed
 }
 
 const STEPS: Step[] = [
-  {
-    id: 1,
-    title: "Step 1",
-    description: "Get the extension from Chrome webstore.",
+  { 
+    id: 1, 
+    title: "Get the Extension", 
+    description: "Download the extension from Chrome webstore.",
+    image: Extension
   },
-  {
-    id: 2,
-    title: "Step 2",
-    description: "Click on the extension during online meet",
+  { 
+    id: 2, 
+    title: "Activate During Meet", 
+    description: "Click on the extension during your online meeting.",
+    image: Font
   },
-  {
-    id: 3,
-    title: "Step 3",
-    description: "Enjoy the experience :D",
-  },
+  { 
+    id: 3, 
+    title: "Enjoy the Experience", 
+    description: "Seamless integration for enhanced meeting experience.",
+    image: meet
+  }
 ];
 
 const StepsProgress: React.FC = () => {
   const [step, setStep] = useState<number>(1);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
-  const progressValue: number = (step / STEPS.length) * 100;
   const [carouselIndex, setCarouselIndex] = useState<number>(0);
 
-  // Automatically update the step and carousel index every 3 seconds.
+  const progressValue: number = (step / STEPS.length) * 100;
+
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (isPlaying) {
       timer = setInterval(() => {
-        setStep((prevStep) => {
-          const nextStep = prevStep === STEPS.length ? 1 : prevStep + 1;
-          setCarouselIndex(nextStep - 1);
-          return nextStep;
-        });
+        handleNextStep();
       }, 3000);
     }
     return () => clearInterval(timer);
   }, [isPlaying]);
 
-  // Carousel items array with responsive styling.
-  const carouselItems = [
-    <div
-      key="item1"
-      className="p-2 flex flex-col items-center justify-center space-y-2"
-    >
-      <div className="relative w-full sm:max-w-md lg:max-w-lg aspect-[2.67]">
-        <Image src={Extension} alt="Extension" layout="fill" objectFit="contain" />
-      </div>
-      <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold">Carousel Item 1</h2>
-      <p className="text-sm sm:text-base lg:text-lg text-center">
-        This is the first custom content block.
-      </p>
-    </div>,
-    ...Array(4)
-      .fill(null)
-      .map((_, index) => (
+  const handleNextStep = () => {
+    setStep((prevStep) => {
+      const nextStep = prevStep === STEPS.length ? 1 : prevStep + 1;
+      setCarouselIndex(nextStep - 1);
+      return nextStep;
+    });
+  };
+
+  const handlePrevStep = () => {
+    setStep((prevStep) => {
+      const nextStep = prevStep === 1 ? STEPS.length : prevStep - 1;
+      setCarouselIndex(nextStep - 1);
+      return nextStep;
+    });
+  };
+
+  const handleStepClick = (clickedStep: number) => {
+    setStep(clickedStep);
+    setCarouselIndex(clickedStep - 1);
+  };
+
+  const ProgressBar = () => (
+    <div className="relative flex flex-col items-center w-12 md:w-16 lg:w-20">
+      <div className="h-[300px] md:h-[400px] lg:h-[500px] w-2 md:w-3 bg-gray-200 rounded-full relative">
         <div
-          key={`item${index + 2}`}
-          className="p-2 flex flex-col items-center justify-center space-y-2"
-        >
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold">
-            Carousel Item {index + 2}
-          </h2>
-          <p className="text-sm sm:text-base lg:text-lg text-center">
-            This is the {index + 2} custom content block.
-          </p>
-        </div>
-      )),
-  ];
-
-  return (
-    <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row w-full p-4 sm:p-6 md:p-8 lg:p-12 mt-0 md:mt-16 justify-center items-center gap-4 md:gap-8 lg:gap-16">
-      {/* Left Progress Bar */}
-      <div className="hidden md:flex flex-col items-center w-12 md:w-24 lg:w-48">
-        <div className="h-24 md:h-48 lg:h-96 w-2 md:w-4 lg:w-8 bg-gray-200 rounded-full relative">
-          <div
-            className="absolute top-0 w-full bg-gradient-to-b from-blue-400 to-indigo-600 rounded-full transition-all duration-700 ease-in-out"
-            style={{ height: `${progressValue}%` }}
-          />
-          {STEPS.map((stepItem) => (
-            <div
-              key={stepItem.id}
-              className={`absolute flex items-center ${
-                // Position labels on the left
-                "-left-4 md:-left-8 lg:-left-16"
-              }`}
-              style={{
-                top: `${((stepItem.id - 1) / (STEPS.length - 1)) * 100}%`,
-              }}
-            >
-              <div
-                className={`w-2 md:w-3 lg:w-4 h-2 md:h-3 lg:h-4 rounded-full transition-all duration-500 ${
-                  step >= stepItem.id ? "bg-indigo-600" : "bg-gray-300"
-                } ${step === stepItem.id ? "scale-150" : "scale-100"}`}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* main content area */}
-      <div className="flex flex-col w-full md:flex-1 md:min-w-[500px] lg:min-w-[750px]">
+          className="absolute top-0 left-0 w-full bg-gradient-to-b from-blue-400 to-indigo-600 rounded-full transition-all duration-700 ease-in-out"
+          style={{ height: `${progressValue}%` }}
+        />
         {STEPS.map((stepItem) => (
           <div
             key={stepItem.id}
-            className="mb-2 sm:mb-4 md:mb-6 lg:mb-8 transition-all duration-500"
+            className="absolute flex items-center -left-6 md:-left-10 cursor-pointer"
+            style={{ top: `${((stepItem.id - 1) / (STEPS.length - 1)) * 100}%` }}
+            onClick={() => handleStepClick(stepItem.id)}
+          >
+            <div
+              className={`w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 rounded-full transition-all duration-500 
+                ${step >= stepItem.id ? "bg-indigo-600" : "bg-gray-300"} 
+                ${step === stepItem.id ? "scale-125" : "scale-100"}`}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="flex flex-col md:flex-row h-auto md:h-screen w-full p-4 md:p-12 mt-0 md:mt-16 justify-center items-center gap-6 lg:gap-16">
+      {/* Steps Content */}
+      <div className="flex flex-col w-full md:flex-1 md:min-w-[350px] lg:min-w-[450px]">
+        {STEPS.map((stepItem) => (
+          <div
+            key={stepItem.id}
+            className="mb-4 md:mb-8 transition-all duration-500"
             style={{
-              transform: step === stepItem.id ? "scale(1.02)" : "scale(1)",
+              transform: step === stepItem.id ? "scale(1.05)" : "scale(1)",
               opacity: step === stepItem.id ? 1 : 0.7,
             }}
+            onClick={() => handleStepClick(stepItem.id)}
           >
             <Card
-              className={`w-full shadow-md border transition-all ${
-                step === stepItem.id
-                  ? "border-indigo-600 shadow-blue-100"
-                  : "border-blue-400"
-              }`}
+              className={`w-full shadow-xl border-2 transition-all cursor-pointer 
+                ${step === stepItem.id
+                  ? "border-indigo-600 shadow-blue-200"
+                  : "border-blue-400"}`}
             >
-              <div className="flex flex-col md:flex-row items-center p-2 sm:p-4 md:p-6 lg:p-8">
-                <div className="flex-shrink-0 w-12 sm:w-16 md:w-24 lg:w-32 mb-2 md:mb-0 md:mr-4">
+              <div className="flex items-center p-4 md:p-6">
+                <div className="flex-shrink-0 w-16 md:w-20 flex-row mr-4 md:mr-6">
                   <div
-                    className={`w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-full flex items-center justify-center transition-all duration-500 text-base sm:text-lg md:text-xl ${
-                      step >= stepItem.id
-                        ? "bg-indigo-600 text-white ring-2 md:ring-4 ring-blue-200"
-                        : "bg-gray-200 text-gray-600"
-                    }`}
+                    className={`w-10 h-10 md:w-14 md:h-14 rounded-full flex items-center justify-center text-lg md:text-xl font-bold transition-all duration-500 
+                      ${step >= stepItem.id
+                        ? "bg-indigo-600 text-white ring-2 ring-blue-200"
+                        : "bg-gray-200 text-gray-600"}`}
                   >
                     {stepItem.id}
                   </div>
                 </div>
-                <div className="flex-1 text-center md:text-left">
+                <div className="flex-1">
                   <h3
-                    className={`text-base sm:text-xl md:text-2xl lg:text-3xl font-bold transition-colors duration-300 ${
-                      step === stepItem.id ? "text-blue-800" : "text-gray-900"
-                    }`}
+                    className={`text-lg md:text-2xl font-bold transition-colors duration-300 
+                      ${step === stepItem.id ? "text-blue-800" : "text-gray-900"}`}
                   >
                     {stepItem.title}
                   </h3>
-                  <p className="text-xs sm:text-sm md:text-base lg:text-lg text-slate-800 mt-1 sm:mt-2">
+                  <p className="text-sm md:text-lg text-slate-800 mt-2">
                     {stepItem.description}
                   </p>
                 </div>
@@ -159,20 +146,42 @@ const StepsProgress: React.FC = () => {
         ))}
       </div>
 
-      {/* Carousel Area */}
-      <div className="w-full max-w-xs sm:max-w-md lg:max-w-lg mt-4 md:mt-0">
-        <Carousel className="w-full">
-          <CarouselContent
-            className="overflow-hidden transition-transform duration-700 ease-in-out"
-            style={{ transform: `translateX(-${carouselIndex * 100}%)` }}
-          >
-            {carouselItems.map((item) => (
-              <CarouselItem key={(item as any).key} className="w-full">
-                {item}
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
+      {/* Progress Bar at the Center */}
+      <ProgressBar />
+
+      {/* Carousel Content */}
+      <div className="w-full max-w-xs md:max-w-md lg:max-w-lg mt-4 md:mt-0">
+        <div className="relative">
+          <Carousel className="w-full overflow-hidden">
+            <CarouselContent
+              className="h-64 md:h-[500px] lg:h-[800px] transition-transform duration-700 ease-in-out flex"
+              style={{ transform: `translateX(-${carouselIndex * 100}%)` }}
+            >
+              {STEPS.map((stepItem) => (
+                <CarouselItem 
+                  key={stepItem.id} 
+                  className="w-full flex-shrink-0 flex items-center justify-center"
+                >
+                  <div className="p-4 h-full flex flex-col items-center justify-center">
+                    <Image 
+                      src={stepItem.image} 
+                      alt={stepItem.title} 
+                      width={300} 
+                      height={300} 
+                      className="object-contain"
+                    />
+                    <h2 className="text-xl md:text-2xl font-bold my-2 md:my-4">
+                      {stepItem.title}
+                    </h2>
+                    <p className="text-sm md:text-lg text-center">
+                      {stepItem.description}
+                    </p>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        </div>
       </div>
     </div>
   );
