@@ -1,64 +1,64 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=Changa+One&display=swap');
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Changa One', Arial, Helvetica, sans-serif;
 }
 
 @layer base {
   :root {
-    --background: hsl(0 0% 100%); /* Parentheses added */
-    --foreground: hsl(240 10% 3.9%); /* Parentheses added */
-    --card: hsl(0 0% 100%); /* Parentheses added */
-    --card-foreground: hsl(240 10% 3.9%); /* Parentheses added */
-    --popover: hsl(0 0% 100%); /* Parentheses added */
-    --popover-foreground: hsl(240 10% 3.9%); /* Parentheses added */
-    --primary: hsl(240 5.9% 10%); /* Parentheses added */
-    --primary-foreground: hsl(0 0% 98%); /* Parentheses added */
-    --secondary: hsl(240 4.8% 95.9%); /* Parentheses added */
-    --secondary-foreground: hsl(240 5.9% 10%); /* Parentheses added */
-    --muted: hsl(240 4.8% 95.9%); /* Parentheses added */
-    --muted-foreground: hsl(240 3.8% 46.1%); /* Parentheses added */
-    --accent: hsl(240 4.8% 95.9%); /* Parentheses added */
-    --accent-foreground: hsl(240 5.9% 10%); /* Parentheses added */
-    --destructive: hsl(0 84.2% 60.2%); /* Parentheses added */
-    --destructive-foreground: hsl(0 0% 98%); /* Parentheses added */
-    --border: hsl(240 5.9% 90%); /* Parentheses added */
-    --input: hsl(240 5.9% 90%); /* Parentheses added */
-    --ring: hsl(240 10% 3.9%); /* Parentheses added */
-    --chart-1: hsl(12 76% 61%); /* Parentheses added */
-    --chart-2: hsl(173 58% 39%); /* Parentheses added */
-    --chart-3: hsl(197 37% 24%); /* Parentheses added */
-    --chart-4: hsl(43 74% 66%); /* Parentheses added */
-    --chart-5: hsl(27 87% 67%); /* Parentheses added */
+    --background: hsl(0 0% 100%);
+    --foreground: hsl(240 10% 3.9%);
+    --card: hsl(0 0% 100%);
+    --card-foreground: hsl(240 10% 3.9%);
+    --popover: hsl(0 0% 100%);
+    --popover-foreground: hsl(240 10% 3.9%);
+    --primary: hsl(240 5.9% 10%);
+    --primary-foreground: hsl(0 0% 98%);
+    --secondary: hsl(240 4.8% 95.9%);
+    --secondary-foreground: hsl(240 5.9% 10%);
+    --muted: hsl(240 4.8% 95.9%);
+    --muted-foreground: hsl(240 3.8% 46.1%);
+    --accent: hsl(240 4.8% 95.9%);
+    --accent-foreground: hsl(240 5.9% 10%);
+    --destructive: hsl(0 84.2% 60.2%);
+    --destructive-foreground: hsl(0 0% 98%);
+    --border: hsl(240 5.9% 90%);
+    --input: hsl(240 5.9% 90%);
+    --ring: hsl(240 10% 3.9%);
+    --chart-1: hsl(12 76% 61%);
+    --chart-2: hsl(173 58% 39%);
+    --chart-3: hsl(197 37% 24%);
+    --chart-4: hsl(43 74% 66%);
+    --chart-5: hsl(27 87% 67%);
     --radius: 0.5rem;
   }
   .dark {
-    --background: hsl(240 10% 3.9%); /* Parentheses added */
-    --foreground: hsl(0 0% 98%); /* Parentheses added */
-    --card: hsl(240 10% 3.9%); /* Parentheses added */
-    --card-foreground: hsl(0 0% 98%); /* Parentheses added */
-    --popover: hsl(240 10% 3.9%); /* Parentheses added */
-    --popover-foreground: hsl(0 0% 98%); /* Parentheses added */
-    --primary: hsl(0 0% 98%); /* Parentheses added */
-    --primary-foreground: hsl(240 5.9% 10%); /* Parentheses added */
-    --secondary: hsl(240 3.7% 15.9%); /* Parentheses added */
-    --secondary-foreground: hsl(0 0% 98%); /* Parentheses added */
-    --muted: hsl(240 3.7% 15.9%); /* Parentheses added */
-    --muted-foreground: hsl(240 5% 64.9%); /* Parentheses added */
-    --accent: hsl(240 3.7% 15.9%); /* Parentheses added */
-    --accent-foreground: hsl(0 0% 98%); /* Parentheses added */
-    --destructive: hsl(0 62.8% 30.6%); /* Parentheses added */
-    --destructive-foreground: hsl(0 0% 98%); /* Parentheses added */
-    --border: hsl(240 3.7% 15.9%); /* Parentheses added */
-    --input: hsl(240 3.7% 15.9%); /* Parentheses added */
-    --ring: hsl(240 4.9% 83.9%); /* Parentheses added */
-    --chart-1: hsl(220 70% 50%); /* Parentheses added */
-    --chart-2: hsl(160 60% 45%); /* Parentheses added */
-    --chart-3: hsl(30 80% 55%); /* Parentheses added */
-    --chart-4: hsl(280 65% 60%); /* Parentheses added */
-    --chart-5: hsl(340 75% 55%); /* Parentheses added */
+    --background: hsl(240 10% 3.9%);
+    --foreground: hsl(0 0% 98%);
+    --card: hsl(240 10% 3.9%);
+    --card-foreground: hsl(0 0% 98%);
+    --popover: hsl(240 10% 3.9%);
+    --popover-foreground: hsl(0 0% 98%);
+    --primary: hsl(0 0% 98%);
+    --primary-foreground: hsl(240 5.9% 10%);
+    --secondary: hsl(240 3.7% 15.9%);
+    --secondary-foreground: hsl(0 0% 98%);
+    --muted: hsl(240 3.7% 15.9%);
+    --muted-foreground: hsl(240 5% 64.9%);
+    --accent: hsl(240 3.7% 15.9%);
+    --accent-foreground: hsl(0 0% 98%);
+    --destructive: hsl(0 62.8% 30.6%);
+    --destructive-foreground: hsl(0 0% 98%);
+    --border: hsl(240 3.7% 15.9%);
+    --input: hsl(240 3.7% 15.9%);
+    --ring: hsl(240 4.9% 83.9%);
+    --chart-1: hsl(220 70% 50%);
+    --chart-2: hsl(160 60% 45%);
+    --chart-3: hsl(30 80% 55%);
+    --chart-4: hsl(280 65% 60%);
+    --chart-5: hsl(340 75% 55%);
   }
 }
 
@@ -69,66 +69,12 @@ body {
   body {
     @apply bg-background text-foreground;
   }
-}
-
-html {
-  scroll-snap-type: y mandatory;
-}
-
-.img-container {
-  height: 100vh;
-  scroll-snap-align: start;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.img-container > div {
-  width: 300px;
-  height: 400px;
-  margin: 20px;
-  background: #f5f5f5;
-  overflow: hidden;
-}
-
-.img-container img {
-  width: 300px;
-  height: 400px;
-}
-
-@media (max-width: 500px) {
-  .img-container > div {
-      width: 150px;
-      height: 200px;
-  }
-
-  .img-container img {
-      width: 150px;
-      height: 200px;
+  .text-style-body {
+    /* You can add any additional styles if needed */
+    font-family: 'Changa One', Arial, Helvetica, sans-serif;
+    /* Optionally, add font-size, line-height, etc. */
+    @apply text-base;
   }
 }
 
-.img-container h2 {
-  color: #4ff0b7;
-  margin: 0;
-  font-family: JetBrains Mono, monospace;
-  font-size: 50px;
-  font-weight: 700;
-  letter-spacing: -3px;
-  line-height: 1.2;
-  position: absolute;
-  display: inline-block;
-  top: calc(50% - 25px);
-  left: calc(50% + 120px);
-}
-
-.progress {
-  position: fixed;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background: #4ff0b7;
-  bottom: 50px;
-  transform: scaleX(0);
-}
+/* (Your remaining custom styles, media queries, etc.) */
