@@ -1,6 +1,6 @@
 import { body, nav } from 'motion/react-client';
 import React from 'react';
-import Navbar from '../components/navbar';
+import Navbar from '../navbar';
 import Hov from '../components/hover';
 
 function FirstPage1() {

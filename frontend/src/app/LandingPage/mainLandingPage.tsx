@@ -13,7 +13,7 @@ import {
     useTransform,
 } from "framer-motion";
 import { useRef } from "react";
-import Navbar from "../components/navbar";
+import Navbar from "../navbar";
 import StepsProgress from "./thirdPage";
 
 // Define the type for the useParallax hook
@@ -53,7 +53,7 @@ export function Container({ id, children }: ContainerProps) {
     );
 }
 
-// Main Parallax Component
+// main Parallax Component
 export default function Parallax() {
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, {
