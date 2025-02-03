@@ -65,10 +65,10 @@ export const columns: ColumnDef<Meeting>[] = [
         accessorKey: "info",
         header: "Info",
         cell: ({ row }) => {
-            const info = row.getValue("info")
+            const id = row.original.id
             return (
-                <Link href={`/new-page?info=${encodeURIComponent(info)}`} passHref>
-                    <div className="text-blue-500 cursor-pointer hover:underline">{info}</div>
+                <Link href={`/meeting/${id}`} className="text-blue-500 cursor-pointer hover:underline">
+                    View Details
                 </Link>
             )
         },

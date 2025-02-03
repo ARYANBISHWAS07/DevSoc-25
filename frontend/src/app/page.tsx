@@ -1,9 +1,8 @@
 import Main from "@/app/Main/page";
-import Parallax from "./LandingPage/mainLandingPage";
-
+import Meetings from "@/app/Meetings/[id]/page";
 
 export default function Home() {
   return(
-      <Parallax/>
+      <Main/>
   )
 }

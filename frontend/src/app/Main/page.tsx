@@ -1,6 +1,7 @@
 import Navbar from "@/app/components/navbar";
 import {DataTable} from "@/contents-ui/table";
 import {Clock,NotebookPen} from "lucide-react";
+import {ChartComponent} from "@/contents-ui/graph";
 
 
 export default function Page() {
@@ -20,6 +21,7 @@ export default function Page() {
                         <h1 className="font-bold text-blue-900">Total Meets:</h1>
                         <p className="text-xl font-semibold text-blue-900">72</p>
                     </div>
+
                     <div className="w-1 h-[60%] bg-blue-800 rounded-full"></div>
                     <div className="flex flex-col items-center">
                         <NotebookPen size={50} className="text-blue-800"/>
@@ -27,7 +29,9 @@ export default function Page() {
                         <p className="text-xl font-semibold text-blue-900">17 Hr 50 Min</p>
                     </div>
                 </div>
-
+                <div className="flex justify-center">
+                    <ChartComponent/>
+                </div>
             </div>
             <DataTable/>
         </div>
