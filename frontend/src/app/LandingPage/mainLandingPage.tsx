@@ -81,7 +81,7 @@ export default function Parallax() {
 
                 {/* Bottom Animation (Fixed Position) */}
                 <motion.div
-                    className="fixed bottom-0 left-0 h-2 bg-blue-500 origin-center w-full z-30"
+                    className="fixed bottom-0 left-0 h-2 bg-gradient-to-t from-blue-500 to-slate-700 origin-center w-full z-30"
                     style={{ scaleX }}
                 />
             </div>
