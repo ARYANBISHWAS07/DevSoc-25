@@ -65,7 +65,7 @@ export default function Parallax() {
     return (
         <>
             <Navbar />
-            <div className="relative w-full  overflow-x-hidden"> {/* Ensure background is fixed and doesn't interfere with scrolling */}
+            <div className="relative w-full  overflow-x-hidden "> {/* Ensure background is fixed and doesn't interfere with scrolling */}
                 <div className="h-screen flex items-center justify-center z-10">
                 <div className=' h-screen flex items-center justify-center'>
                 <section className=" py-14"> {/* Example Tailwind classes */}
@@ -100,7 +100,7 @@ export default function Parallax() {
 
                 {/* Bottom Animation (Fixed Position) */}
                 <motion.div
-                    className="fixed bottom-0 left-0 h-2 bg-blue-500 origin-center w-full z-30"
+                    className="fixed bottom-0 left-0 h-2 bg-gradient-to-t from-blue-500 to-slate-700 origin-center w-full z-30"
                     style={{ scaleX }}
                 />
             </div>
