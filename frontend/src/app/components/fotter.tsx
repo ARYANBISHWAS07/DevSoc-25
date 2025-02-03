@@ -8,7 +8,8 @@ import { Ear } from 'lucide-react';
 
 function Footer() {
     return (
-        <footer className="bg-sky-200 border-t-2 border-white py-20 ">
+        <footer className="bottom-0 bg-slate-800 border-t-2 border-white py-20 
+                dark:bg-slate-900 dark:border-gray-700 transition-all duration-300">
             <div className=" mx-8 ">
                 <div className=" flex justify-around pb-4 border-b border-b-purple-500">
                     <div className="text-4xl font-mono font-bold text-purple-800"><span><Ear className="inline-block size-8"/></span>ECHOSIGN</div>

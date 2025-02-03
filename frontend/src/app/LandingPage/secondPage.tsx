@@ -96,11 +96,11 @@ export function Page2() {
 
   return (
     <Container id={2}>
-      <div className="relative flex flex-row items-end justify-center min-h-screen w-full overflow-hidden">
+      <div className="relative flex flex-row items-end justify-center min-h-screen w-full overflow-hidden m-2">
         {/* Hand Image Positioned at Top */}
         
         {/* Containers Section */}
-        <div className="flex flex-col items-center justify-center z-0 space-y-16 w-full px-4">
+        <div className="flex flex-col items-end justify-center z-20 space-y-16 w-full px-4">
           {descriptions.map((item, index) => (
             <AnimatePresence key={`rect-${index}`}>
               <motion.div
@@ -112,16 +112,21 @@ export function Page2() {
                 exit="exit"
                 custom={index}
                 animate={controls} // Apply elevation animation after initial animation
-                className={`
-                  ${index === 0 ? "w-[800px] h-[180px]" : 
-                   index === 1 ? "w-[600px] h-[180px]" : 
-                   "w-[400px] h-[180px]"}
-                  bg-gradient-to-r from-blue-800 to-blue-900 rounded-xl 
-                  flex items-center space-x-6 p-4 
-                  shadow-2xl shadow-blue-500/50 
-                  transform transition-all duration-300 
-                  hover:scale-[1.02] hover:shadow-blue-600/70
-                `}
+                    className={`
+       ${index === 0 ? "w-[800px] h-[180px]" : 
+    index === 1 ? "w-[600px] h-[180px] " : 
+    "w-[400px] h-[180px]"}
+    bg-gradient-to-r from-blue-800 to-blue-900 rounded-xl 
+    flex items-center space-x-6 p-4 
+    shadow-2xl shadow-blue-500/50 
+    transform transition-all delay-150 duration-300 ease-in-out 
+    hover:bg-gradient-to-l hover:from-blue-700 hover:to-blue-800
+    hover:text-white
+    hover:ring-4 hover:ring-blue-400 hover:ring-opacity-100
+    hover:rotate-1
+    hover:opacity-90
+
+                    `}
               >
                 {/* Image Section */}
                 <div className="w-1/3 h-full">
