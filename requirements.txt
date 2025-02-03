@@ -1,0 +1,4 @@
+mediapipe==0.10.20
+numpy==2.2.2
+opencv_python==4.11.0.86
+scikit-learn==1.6.1
