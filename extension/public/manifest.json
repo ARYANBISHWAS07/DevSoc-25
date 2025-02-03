@@ -17,13 +17,10 @@
   },
   "content_scripts": [
     {
-      "js": [
-        "content.js"
-      ],
-      "matches": [
-        "<all_urls>"
-      ]
+      "js": ["content.js"],
+      "matches": ["<all_urls>"]
     }
   ],
-  "permissions": ["activeTab","scripting", "tabs"]
+  "permissions": ["activeTab", "scripting", "tabs"],
+  "host_permissions": ["<all_urls>"]
 }
