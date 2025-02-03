@@ -3,12 +3,12 @@ import Link from "next/link";
 
 export default function Navbar() {
     return (
-        <nav className="flex items-center justify-between px-10 bg-transparent">
+        <nav className="flex items-center justify-between bg-transparent">
             <div>
                 <OneLogo />
             </div>
-            <div className="flex-1 flex justify-center">
-                <ul className="flex flex-row gap-6 text-lg font-semibold">
+            <div className="flex justify-center">
+                <ul className="flex flex-row gap-6 text-lg font-semibold mr-20">
                     {[
                         { name: "Home", path: "/" },
                         { name: "Profile", path: "/" },
@@ -25,6 +25,10 @@ export default function Navbar() {
                         </li>
                     ))}
                 </ul>
+                
+            </div>
+            <div className="invisible">
+                    <h1>hello</h1>
             </div>
         </nav>
     );
