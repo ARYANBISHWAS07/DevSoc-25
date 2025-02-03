@@ -36,39 +36,6 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
-const data: Payment[] = [
-    {
-        id: "m5gr84i9",
-        amount: 316,
-        status: "success",
-        email: "ken99@yahoo.com",
-    },
-    {
-        id: "3u1reuv4",
-        amount: 242,
-        status: "success",
-        email: "Abe45@gmail.com",
-    },
-    {
-        id: "derv1ws0",
-        amount: 837,
-        status: "processing",
-        email: "Monserrat44@gmail.com",
-    },
-    {
-        id: "5kma53ae",
-        amount: 874,
-        status: "success",
-        email: "Silas22@gmail.com",
-    },
-    {
-        id: "bhqecj4p",
-        amount: 721,
-        status: "failed",
-        email: "carmella@hotmail.com",
-    },
-]
-
 export type Payment = {
     id: string
     amount: number
@@ -76,7 +43,53 @@ export type Payment = {
     email: string
 }
 
-export const columns: ColumnDef<Payment>[] = [
+export type Meeting = {
+    id: string
+    user: string
+    email: string
+    minutes: number
+    date: string
+}
+
+const data: Meeting[] = [
+    {
+        id: "1",
+        user: "John",
+        email: "john@example.com",
+        minutes: 30,
+        date: "2023-06-01",
+    },
+    {
+        id: "2",
+        user: "Alice",
+        email: "alice@example.com",
+        minutes: 45,
+        date: "2023-06-02",
+    },
+    {
+        id: "3",
+        user: "Bob",
+        email: "bob@example.com",
+        minutes: 60,
+        date: "2023-06-03",
+    },
+    {
+        id: "4",
+        user: "Carol",
+        email: "carol@example.com",
+        minutes: 25,
+        date: "2023-06-04",
+    },
+    {
+        id: "5",
+        user: "Dave",
+        email: "dave@example.com",
+        minutes: 90,
+        date: "2023-06-05",
+    },
+]
+
+export const columns: ColumnDef<Meeting>[] = [
     {
         id: "select",
         header: ({ table }) => (
@@ -100,6 +113,18 @@ export const columns: ColumnDef<Payment>[] = [
         enableHiding: false,
     },
     {
+        id: "serial",
+        header: "S.No",
+        cell: ({ row }) => row.index + 1,
+        enableSorting: false,
+        enableHiding: false,
+    },
+    {
+        accessorKey: "user",
+        header: "User",
+        cell: ({ row }) => <div className="capitalize">{row.getValue("user")}</div>,
+    },
+    {
         accessorKey: "status",
         header: "Status",
         cell: ({ row }) => (
@@ -115,7 +140,7 @@ export const columns: ColumnDef<Payment>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Email
-                    <ArrowUpDown />
+                    <ArrowUpDown className="ml-2" />
                 </Button>
             )
         },
@@ -126,8 +151,6 @@ export const columns: ColumnDef<Payment>[] = [
         header: () => <div className="text-right">Amount</div>,
         cell: ({ row }) => {
             const amount = parseFloat(row.getValue("amount"))
-
-            // Format the amount as a dollar amount
             const formatted = new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "USD",
@@ -137,10 +160,22 @@ export const columns: ColumnDef<Payment>[] = [
         },
     },
     {
+        accessorKey: "minutes",
+        header: () => <div className="text-right">Minutes</div>,
+        cell: ({ row }) => (
+            <div className="text-right font-medium">{row.getValue("minutes")}</div>
+        ),
+    },
+    {
+        id: "date",
+        header: "Date",
+        cell: ({ row }) => <div>{row.getValue("date")}</div>,
+    },
+    {
         id: "actions",
         enableHiding: false,
         cell: ({ row }) => {
-            const payment = row.original
+            const meeting = row.original
 
             return (
                 <DropdownMenu>
@@ -153,13 +188,13 @@ export const columns: ColumnDef<Payment>[] = [
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuItem
-                            onClick={() => navigator.clipboard.writeText(payment.id)}
+                            onClick={() => navigator.clipboard.writeText(meeting.id)}
                         >
-                            Copy payment ID
+                            Copy meeting ID
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>View customer</DropdownMenuItem>
-                        <DropdownMenuItem>View payment details</DropdownMenuItem>
+                        <DropdownMenuItem>View user</DropdownMenuItem>
+                        <DropdownMenuItem>View meeting details</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             )
@@ -167,13 +202,10 @@ export const columns: ColumnDef<Payment>[] = [
     },
 ]
 
-export function DataTableDemo() {
+export function DataTable() {
     const [sorting, setSorting] = React.useState<SortingState>([])
-    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-        []
-    )
-    const [columnVisibility, setColumnVisibility] =
-        React.useState<VisibilityState>({})
+    const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+    const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
     const [rowSelection, setRowSelection] = React.useState({})
 
     const table = useReactTable({
@@ -209,7 +241,7 @@ export function DataTableDemo() {
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="outline" className="ml-auto">
-                            Columns <ChevronDown />
+                            Columns <ChevronDown className="ml-2" />
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
