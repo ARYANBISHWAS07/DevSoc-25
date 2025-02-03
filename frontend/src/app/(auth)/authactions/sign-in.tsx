@@ -1,15 +1,12 @@
+"use server";
 
-import { signIn } from "../auth"
+import {auth, signIn} from "../auth";
 
-export default function SignIn() {
-    return (
-        <form
-            action={async () => {
-                "use server"
-                await signIn("google")
-            }}
-        >
-            <button type="submit">Signin with Google</button>
-        </form>
-    )
+export default async function Signin() {
+    console.log("Signing in")
+    const session = await auth();
+    if (session?.user) {
+        return;
+    }
+    await signIn("google");
 }
