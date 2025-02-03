@@ -1,3 +1,5 @@
+// Parallax.tsx
+
 "use client";
 import Page1 from "./firstPage1";
 import { Page2 } from "./secondPage";
@@ -14,7 +16,7 @@ import {
 import { useRef } from "react";
 
 // Define the type for the useParallax hook
-export  function useParallax(value: MotionValue<number>, distance: number) {
+export function useParallax(value: MotionValue<number>, distance: number) {
     return useTransform(value, [0, 1], [-distance, distance]);
 }
 
@@ -25,7 +27,7 @@ interface ContainerProps {
 }
 
 // Container component for each page
-export  function Container({ id, children }: ContainerProps) {
+export function Container({ id, children }: ContainerProps) {
     const ref = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({ target: ref });
     const y = useParallax(scrollYProgress, 300);
@@ -33,9 +35,9 @@ export  function Container({ id, children }: ContainerProps) {
     return (
         <section 
             ref={ref} 
-            className="container w-screen min-h-screen flex items-center justify-center relative mt-5"
+            className=" fixed container w-[100%] min-h-screen flex items-center justify-center relative mt-5 mr-20"
         >
-            <div className="content w-full"> {/* Full width content */}
+            <div className="content w-full"> {/* Full width content */ }
                 {children}
             </div>
             <motion.h2
@@ -44,22 +46,11 @@ export  function Container({ id, children }: ContainerProps) {
                 style={{ y }}
                 className="absolute top-10 left-10 text-3xl font-bold"
             >
-          
+                {/* You can add text or other content here if needed */}
             </motion.h2>
         </section>
     );
 }
-
-
-// Page Components
-
-
-
-
-
-
-
-
 
 // Main Parallax Component
 export default function Parallax() {
@@ -71,24 +62,26 @@ export default function Parallax() {
     });
 
     return (
-        <div className=" top-0 left-0 right-0 w-full bg-gradient-to-r from-blue-900 to-blue-400">
+        <div className="relative w-full bg-gradient-to-r from-blue-900 to-blue-400 overflow-x-hidden"> {/* Ensure background is fixed and doesn't interfere with scrolling */}
             {/* Static Section (Full Screen) */}
-            <div className="h-screen flex items-center justify-center">
+            <div className="h-screen flex items-center justify-center z-10">
                 <h1 className="text-5xl font-bold text-white">Welcome to My Page</h1>
             </div>
 
             {/* Scrolling Section (Starts After Static Section) */}
-            <div id="example" className="relative mt-0">  
+            <div id="example" className="relative justify-center items-center m-20 z-20"> {/* Ensure the content is above the background */}
                 <Page1 />
                 <Page2 />
                 <Page3 />
                 <Page4 />
                 <Page5 />
-                <motion.div 
-                    className="fixed bottom-0 left-0 h-2 bg-blue-500 origin-center w-full" 
-                    style={{ scaleX }} 
-                />
             </div>
+
+            {/* Bottom Animation (Fixed Position) */}
+            <motion.div 
+                className="fixed bottom-0 left-0 h-2 bg-blue-500 origin-center w-full z-30" 
+                style={{ scaleX }} 
+            />
         </div>
     );
 }
