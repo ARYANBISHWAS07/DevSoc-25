@@ -1,8 +1,10 @@
 import Image from "next/image";
-import FirstPage1 from "./LandingPage/firstPage1";
+import Parallax from "./LandingPage/mainLandingPage";
 
 export default function Home() {
   return (
-    <FirstPage1 />
+
+      <Parallax/>
+
   );
 }
