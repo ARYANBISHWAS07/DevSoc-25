@@ -1,10 +1,33 @@
-import {Container} from "./mainLandingPage";
-export default function Page1() {
+import { body, nav } from 'motion/react-client';
+import React from 'react';
+import Navbar from '../components/navbar';
+
+function FirstPage1() {
     return (
-        <Container id={1}>
-            <div className="flex flex-col  items-center justify-center w-full h-screen  bg-blue-500 bg-opacity-80 p-10 ">
-                
+        <>
+            <div className='bg-[rgb(32,90,252)] h-screen flex items-center justify-center'>
+                <section className=" py-14"> {/* Example Tailwind classes */}
+                    <div className="container mx-auto text-center">
+                        <div className='mb-10'>
+                            <h1 className="font-light font-sans text-5xl  text-white mb-4 ">
+                                CAN YOU
+                            </h1>
+                            <h1 className="font-extralight font-sans text-5xl  text-white mb-4 ">
+                                HEAR ME NOW?
+                            </h1>
+                        </div>
+                        <div className='text-center flex justify-center'>
+                            <p className=" font-mono text-xs font-extralight text-center w-1/3 text-white">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti unde deserunt quasi incidunt blanditiis eaque voluptates minima, voluptatem molestiae ut doloremque dolorum consequuntur, consequatur atque delectus maiores error sequi nulla? {/* Your description */}
+                            </p>
+                        </div>
+
+                    </div>
+                </section>
             </div>
-        </Container>
+        </>
+
     );
-}
+};
+
+export default FirstPage1;
