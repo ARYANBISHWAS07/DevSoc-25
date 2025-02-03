@@ -95,7 +95,7 @@ export default function Parallax() {
                     <Page2 />
                     <StepsProgress />
                     <Page4 />
-                    <Page5 />
+                    {/* <Page5 /> */}
                 </div>
 
                 {/* Bottom Animation (Fixed Position) */}
