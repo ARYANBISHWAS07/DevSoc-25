@@ -1,8 +1,10 @@
 import Image from "next/image";
-import Navbar from "@/app/components/navbar";
+import Parallax from "./LandingPage/mainLandingPage";
 
 export default function Home() {
   return (
-      <Navbar/>
+
+      <Parallax/>
+
   );
 }
