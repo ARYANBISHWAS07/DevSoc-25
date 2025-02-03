@@ -5,8 +5,8 @@ import Hov from '../components/hover';
 
 function FirstPage1() {
     return (
-        <div    >
-            <h1 className="text-4xl font-bold">CAUSES</h1>
+        <>
+            {/* <h1 className="text-4xl font-bold">CAUSES</h1> */}
             {/* <div className="grid grid-rows-2 grid-cols-3 h-[90vh] w-full shadow-sm ">
 
                 <div className="group relative transition-all duration-300 ease-in-out overflow-hidden">

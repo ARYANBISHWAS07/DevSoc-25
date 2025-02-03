@@ -8,8 +8,7 @@ import { Ear } from 'lucide-react';
 
 function Footer() {
     return (
-        <footer className="bottom-0 bg-slate-800 border-t-2 border-white py-20 
-                dark:bg-slate-900 dark:border-gray-700 transition-all duration-300">
+        <footer className="bg-slate-900 border-t-2 border-white py-20 ">
             <div className=" mx-8 ">
                 <div className=" flex justify-around pb-4 border-b border-b-purple-500">
                     <div className="text-4xl font-mono font-bold text-purple-800"><span><Ear className="inline-block size-8"/></span>ECHOSIGN</div>
@@ -21,7 +20,7 @@ function Footer() {
                             hello
                         </div>
                         <ul className="font-mono leading-8 text-lg">
-                            <li className="pb-4 text-xl font-semibold text-purple-800 opacity-50"><span className="pr-1"><Linkedin className="inline-block pb-1" /></span>LINKEDIN</li>
+                            <li className="pb-4 text-xl font-semibold text-purple-800 opacity-90"><span className="pr-1"><Linkedin className="inline-block pb-1" /></span>LINKEDIN</li>
                             <li className="text-purple-500">Vansh Dhir</li>
                             <li className="text-purple-500">Aryan Bishwas</li>
                             <li className="text-purple-500" >Dibyendu De</li>
@@ -32,7 +31,7 @@ function Footer() {
                             hello
                         </div>
                         <ul className="font-mono leading-8 text-lg">
-                            <li className="pb-4 text-xl font-semibold text-purple-800 opacity-50">SOCIALS</li>
+                            <li className="pb-4 text-xl font-semibold text-purple-800 opacity-90">SOCIALS</li>
                             <li className="text-purple-500">DaddyVD</li>
                             <li className="text-purple-500">BAKWAS</li>
                             <li className="text-purple-500">KALA JADU</li>
