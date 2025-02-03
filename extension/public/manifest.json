@@ -14,7 +14,7 @@
   },
   "content_scripts": [
     {
-      "js": ["ort.js", "hands.js", "content.js"],
+      "js": ["content.js"],
       "matches": ["<all_urls>"]
     }
   ],
