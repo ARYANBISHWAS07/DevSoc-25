@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Navbar() {
     return (
-        <nav className="flex items-center justify-between px-8 py-1 bg-[#205afc] shadow-lg">
+        <nav className=" flex items-center justify-between mx-32 py-1 border-b-2 border-b-white border-opacity-35">
             <div>
                 <OneLogo />
             </div>
@@ -16,7 +16,7 @@ export default function Navbar() {
                     <li key={name}>
                         <Link
                             href={path}
-                            className="cursor-pointer text-white transition-all duration-300 ease-in-out hover:text-white/90 hover:opacity-80 px-3 py-2 rounded-lg"
+                            className="cursor-pointer font-sans font-semibold text-white transition-all duration-300 ease-in-out hover:text-white/90 hover:opacity-80 px-3 py-2 rounded-lg"
                         >
                             {name}
                         </Link>
