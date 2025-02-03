@@ -65,28 +65,35 @@ export default function Parallax() {
     return (
         <>
             <Navbar />
+
             <div className="relative w-full  overflow-x-hidden "> {/* Ensure background is fixed and doesn't interfere with scrolling */}
                 <div className="h-screen flex items-center justify-center z-10">
-                <div className=' h-screen flex items-center justify-center'>
-                <section className=" py-14"> {/* Example Tailwind classes */}
-                    <div className="container mx-auto text-center">
-                        <div className='mb-10'>
-                            <h1 className="font-light font-sans text-5xl  text-white mb-4 ">
-                                CAN YOU
-                            </h1>
-                            <h1 className="font-extralight font-sans text-5xl  text-white mb-4 ">
-                                HEAR ME NOW?
-                            </h1>
-                        </div>
-                        <div className='text-center flex justify-center'>
-                            <p className=" font-mono text-xs font-extralight text-center w-1/3 text-white">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti unde deserunt quasi incidunt blanditiis eaque voluptates minima, voluptatem molestiae ut doloremque dolorum consequuntur, consequatur atque delectus maiores error sequi nulla? {/* Your description */}
-                            </p>
-                        </div>
+                    <div className=' h-screen flex items-center justify-center'>
 
+                        <section className=" py-14"> {/* Example Tailwind classes */}
+                            <div className="container mx-auto text-center mb-20">
+                                <div className="flex flex-row justify-center mb-10 mr-16" >
+                                    <img src="new.png"
+                                        className="max-w-[50%] mx-auto"
+                                        alt="" />
+                                </div>
+                                <div className='mb-10'>
+                                    <h1 className="font-light font-sans text-5xl  text-white mb-4 ">
+                                        CAN YOU
+                                    </h1>
+                                    <h1 className="font-extralight font-sans text-5xl  text-white mb-4 ">
+                                        HEAR ME NOW?
+                                    </h1>
+                                </div>
+                                <div className='text-center flex justify-center'>
+                                    <p className=" font-mono text-xs font-extralight text-center w-1/3 text-white">
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti unde deserunt quasi incidunt blanditiis eaque voluptates minima, voluptatem molestiae ut doloremque dolorum consequuntur, consequatur atque delectus maiores error sequi nulla? {/* Your description */}
+                                    </p>
+                                </div>
+
+                            </div>
+                        </section>
                     </div>
-                </section>
-            </div>
                 </div>
 
                 {/* Scrolling Section (Starts After Static Section) */}
@@ -94,7 +101,7 @@ export default function Parallax() {
                     <Page1 />
                     <Page2 />
                     <StepsProgress />
-                    <Page4 />
+                    {/* <Page4 /> */}
                     {/* <Page5 /> */}
                 </div>
 
@@ -104,6 +111,7 @@ export default function Parallax() {
                     style={{ scaleX }}
                 />
             </div>
+
         </>
     );
 }
