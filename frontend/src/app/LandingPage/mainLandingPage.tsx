@@ -67,7 +67,7 @@ export default function Parallax() {
         <>
             <Navbar />
 
-            <div className="relative w-full  overflow-x-hidden "> {/* Ensure background is fixed and doesn't interfere with scrolling */}
+            <div className="relative w-full  overflow-x-hidden"> {/* Ensure background is fixed and doesn't interfere with scrolling */}
                 <div className="h-screen flex items-center justify-center z-10">
                     <div className=' h-screen flex items-center justify-center'>
 
