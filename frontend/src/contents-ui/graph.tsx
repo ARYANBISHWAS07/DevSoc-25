@@ -24,7 +24,7 @@ const chartData = [
 export function ChartComponent() {
     return (
         <div className="ml-[40vw]">
-        <Card className="w-[80vw] max-w-md mx-auto bg-white dark:bg-gray-900 shadow-lg rounded-2xl p-4">
+        <Card className="w-[80vw] bg-blue-300 max-w-md mx-auto dark:bg-gray-900  rounded-2xl p-4">
             <CardHeader className="pb-2">
                 <CardTitle className="text-base font-semibold text-gray-800 dark:text-white">
                     Weekly Meeting Timings(in mins)
