@@ -14,7 +14,7 @@ export function Page2() {
   const rotate = useTransform(scrollYProgress, [0, 1], [-90, 0]);
   const x = 600;
   const y = 200;
-  const scale = 3.3;
+  const scale = 2.9;
 
   const circleVariants = {
     hidden: { opacity: 0, scale: 0.9 },
@@ -51,7 +51,7 @@ export function Page2() {
       scale: 1.1,
       transition: { 
         opacity: { duration: 0.15, ease: "easeIn" },
-        scale: { duration: 0.15 }
+        scale: { duration: 0. }
       }
     }
   };
