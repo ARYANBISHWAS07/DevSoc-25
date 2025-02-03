@@ -1,4 +1,4 @@
-import OneLogo from "@/components/logo2";
+import OneLogo from "@/app/components/logo2";
 import Link from "next/link";
 import { House,User ,Calendar} from 'lucide-react';
 
