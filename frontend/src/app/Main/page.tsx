@@ -1,22 +1,33 @@
 import Navbar from "@/app/components/navbar";
 import {DataTable} from "@/contents-ui/table";
-import {ChartComponent} from "@/contents-ui/graph";
+import {Clock,NotebookPen} from "lucide-react";
+
 
 export default function Page() {
     return (
         <div>
-            <Navbar />
-            <div >
-                <p className="text-white font-bold font-serif text-2xl">
-                    Hello Vansh Dhir
-                </p>
-                <div className="flex flex-row">
-                    <h1>Total Meets:72</h1>
-                    <h2>Total Time Spent:17 hr 50 min</h2>
+            <Navbar/>
+            <div className="mt-4">
+                <div className="ml-[29vw] shadow-gray-200">
+                    <p className="text-white font-bold font-serif text-4xl">
+                        Welcome in, Vansh Dhir
+                    </p>
                 </div>
-                <div className="border-2 border-blue-800 w-[60vw] h-[20vh] ml-[10vw] justify-center rounded-full b">
+                <div
+                    className="flex items-center justify-around border-4 border-blue-800 w-[35vw] m-4 h-[22vh] ml-[30vw] rounded-full bg-blue-50/10 shadow-blue-800/50 backdrop-blur-lg">
+                    <div className="flex flex-col items-center justify-center">
+                        <Clock size={50} className="text-blue-800"/>
+                        <h1 className="font-bold text-blue-900">Total Meets:</h1>
+                        <p className="text-xl font-semibold text-blue-900">72</p>
+                    </div>
+                    <div className="w-1 h-[60%] bg-blue-800 rounded-full"></div>
+                    <div className="flex flex-col items-center">
+                        <NotebookPen size={50} className="text-blue-800"/>
+                        <h1 className="font-bold text-blue-900">Total Time:</h1>
+                        <p className="text-xl font-semibold text-blue-900">17 Hr 50 Min</p>
+                    </div>
+                </div>
 
-                </div>
             </div>
             <DataTable/>
         </div>

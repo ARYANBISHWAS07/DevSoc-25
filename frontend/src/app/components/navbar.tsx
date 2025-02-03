@@ -1,4 +1,4 @@
-import OneLogo from "@/components/logo2";
+import OneLogo from "@/app/components/logo2";
 import Link from "next/link";
 import { House,User ,Calendar} from 'lucide-react';
 
@@ -6,12 +6,12 @@ import { House,User ,Calendar} from 'lucide-react';
 
 export default function Navbar() {
     return (
-        <nav className="flex items-center justify-between px-10 bg-transparent">
+        <nav className="flex items-center justify-between bg-transparent">
             <div>
                 <OneLogo />
             </div>
-            <div className="flex-1 flex justify-center">
-                <ul className="flex flex-row gap-6 text-lg font-semibold">
+            <div className="flex justify-center">
+                <ul className="flex flex-row gap-6 text-lg font-semibold mr-20">
                     {[
                         {icon:<House/>, name: "Home", path: "/" },
                         {icon:<User/>, name: "Profile", path: "/" },
@@ -29,6 +29,10 @@ export default function Navbar() {
                         </li>
                     ))}
                 </ul>
+                
+            </div>
+            <div className="invisible">
+                    <h1>hello</h1>
             </div>
         </nav>
     );
