@@ -12,12 +12,9 @@
     "48": "logo-2.png",
     "128": "logo-2.png"
   },
-  "background": {
-    "service_worker": "background.js"
-  },
   "content_scripts": [
     {
-      "js": ["content.js"],
+      "js": ["ort.js", "hands.js", "content.js"],
       "matches": ["<all_urls>"]
     }
   ],
