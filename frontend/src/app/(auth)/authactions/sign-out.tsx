@@ -1,15 +1,11 @@
+"use server";
 
-import { signOut } from "../auth"
+import { auth, signOut } from "../auth";
 
-export default function SignIn() {
-    return (
-        <form
-            action={async () => {
-                "use server"
-                await signOut()
-            }}
-        >
-            <button type="submit">Signout with Google</button>
-        </form>
-    )
+export default async function SignOut() {
+    console.log("Signing out")
+    const session = await auth();
+    if (session && session.user) {
+        await signOut();
+    }
 }
