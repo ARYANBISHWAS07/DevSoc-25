@@ -1,4 +1,4 @@
-import OneLogo from "@/contents-ui/logo2";
+import OneLogo from "@/components/logo2";
 import Link from "next/link";
 
 export default function Navbar() {
