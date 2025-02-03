@@ -3,7 +3,6 @@
 "use client";
 import Page1 from "./firstPage1";
 import { Page2 } from "./secondPage";
-import { Page3 } from "./thirdPage";
 import { Page4 } from "./fourthPage";
 import { Page5 } from "./fifthPage";
 import {
@@ -15,6 +14,7 @@ import {
 } from "framer-motion";
 import { useRef } from "react";
 import Navbar from "../components/navbar";
+import StepsProgress from "./thirdPage";
 
 // Define the type for the useParallax hook
 export function useParallax(value: MotionValue<number>, distance: number) {
@@ -93,7 +93,7 @@ export default function Parallax() {
                 <div id="example" className="relative justify-center items-center m-20 z-20"> {/* Ensure the content is above the background */}
                     <Page1 />
                     <Page2 />
-                    <Page3 />
+                    <StepsProgress />
                     <Page4 />
                     <Page5 />
                 </div>
