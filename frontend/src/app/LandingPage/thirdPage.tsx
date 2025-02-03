@@ -1,6 +1,10 @@
 "use client";
+import Extension from "../../../public/extension.png"
 import { useState, useEffect } from "react";
-import { Card } from "@/components/ui/card";
+import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 import {
   Carousel,
   CarouselContent,
@@ -40,8 +44,8 @@ const StepsProgress: React.FC = () => {
   }, [isPlaying]);
 
   const ProgressBar = ({ position }: { position: "left" | "right" }) => (
-    <div className="hidden md:hidden md:flex flex-col items-center w-12 md:w-24 lg:w-2">
-      <div className="h-48 md:h-96 lg:h-2 w-4 md:w-6 lg:w-2 bg-gray-200 rounded-full relative">
+    <div className="hidden md:flex flex-col items-center w-12 md:w-24 lg:w-48">
+      <div className="h-48 md:h-96 lg:h-144 w-4 md:w-6 lg:w-8 bg-gray-200 rounded-full relative">
         <div
           className="absolute top-0 w-full bg-gradient-to-b from-blue-400 to-indigo-600 rounded-full transition-all duration-700 ease-in-out"
           style={{ height: `${progressValue}%` }}
@@ -53,7 +57,7 @@ const StepsProgress: React.FC = () => {
             style={{ top: `${((stepItem.id - 1) / (STEPS.length - 1)) * 100}%` }}
           >
             <div
-              className={`w-4 h-4 md:w-5 md:h-5 lg:w-2 lg:h-2 rounded-full transition-all duration-500 ${
+              className={`w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 rounded-full transition-all duration-500 ${
                 step >= stepItem.id ? "bg-indigo-600" : "bg-gray-300"
               } ${step === stepItem.id ? "scale-150" : "scale-100"}`}
             />
@@ -88,7 +92,7 @@ const StepsProgress: React.FC = () => {
         {STEPS.map((stepItem) => (
           <div
             key={stepItem.id}
-            className="mb-4 md:mb-8 lg:mb-2 md:mb-4 transition-all duration-500"
+            className="mb-4 md:mb-8 lg:mb-12 transition-all duration-500"
             style={{
               transform: step === stepItem.id ? "scale(1.02) md:scale(1.05)" : "scale(1)",
               opacity: step === stepItem.id ? 1 : 0.7,
@@ -101,12 +105,12 @@ const StepsProgress: React.FC = () => {
                   : "border-blue-400"
               }`}
             >
-              <div className="flex flex-row items-center p-4 md:p-8 lg:p-2 md:p-4">
-                <div className="flex-shrink-0 w-20 md:w-40 lg:w-16 flex justify-center mr-2 md:mr-4 mr-4 md:mr-8">
+              <div className="flex items-center p-4 md:p-8 lg:p-12">
+                <div className="flex-shrink-0 w-20 md:w-40 lg:w-80 flex-row mr-4 md:mr-8">
                   <div
-                    className={`w-12 h-12 md:w-16 md:h-16 lg:w-10 lg:h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-all duration-500 text-xl md:text-2xl lg:text-base md:text-xl ${
+                    className={`w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-full flex items-center justify-center transition-all duration-500 text-xl md:text-2xl lg:text-3xl ${
                       step >= stepItem.id
-                        ? "bg-indigo-600 text-white ring-2 md:ring-2 ring-blue-200"
+                        ? "bg-indigo-600 text-white ring-2 md:ring-4 ring-blue-200"
                         : "bg-gray-200 text-gray-600"
                     }`}
                   >
@@ -140,7 +144,6 @@ const StepsProgress: React.FC = () => {
             style={{ transform: `translateX(-${carouselIndex * 100}%)` }}
           >
             {carouselItems.map((item) => (
-              <CarouselItem key={(item as any).key} className="w-full">
               <CarouselItem key={(item as any).key} className="w-full">
                 {item}
               </CarouselItem>
