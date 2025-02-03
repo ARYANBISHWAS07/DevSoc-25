@@ -1,4 +1,4 @@
-import Navbar from "@/app/components/navbar";
+import Navbar from "@/app/navbar";
 import {DataTable} from "@/contents-ui/table";
 import {Clock,NotebookPen} from "lucide-react";
 import {ChartComponent} from "@/contents-ui/graph";

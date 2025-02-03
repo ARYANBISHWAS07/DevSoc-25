@@ -111,7 +111,7 @@ const StepsProgress: React.FC = () => {
         </div>
       </div>
 
-      {/* Main content area */}
+      {/* main content area */}
       <div className="flex flex-col w-full md:flex-1 md:min-w-[500px] lg:min-w-[750px]">
         {STEPS.map((stepItem) => (
           <div

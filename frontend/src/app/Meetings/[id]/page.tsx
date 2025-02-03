@@ -1,4 +1,4 @@
-import Navbar from "@/app/components/navbar";
+import Navbar from "@/app/navbar";
 import { ChartComponent } from "@/contents-ui/graph";
 import { Calendar, Clock, Users } from "lucide-react";
 

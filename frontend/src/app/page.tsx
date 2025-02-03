@@ -1,7 +1,7 @@
-import Main from "@/app/Main/page";
+import Parallax from "@/app/LandingPage/mainLandingPage";
 
 export default function Home() {
   return(
-      <Main/>
+      <Parallax/>
   )
 }
