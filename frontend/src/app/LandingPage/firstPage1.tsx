@@ -26,7 +26,7 @@ function FirstPage1() {
 
 
 
-        </>
+        </div>
 
     );
 };

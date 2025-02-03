@@ -9,7 +9,7 @@ function GridWithHover() {
         { letter: 'CAUSE 4', details: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti unde deserunt quasi incidunt blanditiis eaque voluptates minima, voluptatem molestiae ut doloremque dolorum consequuntur, consequatur atque delectus maiores error sequi nulla?' },
         { letter: 'CAUSE 5', details: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti unde deserunt quasi incidunt blanditiis eaque voluptates minima, voluptatem molestiae ut doloremque dolorum consequuntur, consequatur atque delectus maiores error sequi nulla?' },
         { letter: 'CAUSE 6', details: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti unde deserunt quasi incidunt blanditiis eaque voluptates minima, voluptatem molestiae ut doloremque dolorum consequuntur, consequatur atque delectus maiores error sequi nulla?' },
-    ];
+    ];  
 
     useEffect(() => {
         const gridItems = document.querySelectorAll('.grid > div');
@@ -46,7 +46,7 @@ function GridWithHover() {
     }, []);
 
     return (
-        <div className="relative grid grid-cols-3 gap-4 h-[90vh] mb-16 mt-12 shadow-md rounded-md" id="mainCard">
+        <div className="relative grid grid-cols-3 gap-4 h-[90vh] mb-16 mt-12  shadow-md rounded-md " id="mainCard">
             {gridItemsData.map((item, index) => (
                 <div
                     key={index}
