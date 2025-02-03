@@ -5,25 +5,9 @@ import Navbar from '../components/navbar';
 function FirstPage1() {
     return (
         <>
-            <div className='bg-[rgb(32,90,252)] h-screen flex items-center justify-center'>
-                <section className=" py-14"> {/* Example Tailwind classes */}
-                    <div className="container mx-auto text-center">
-                        <div className='mb-10'>
-                            <h1 className="font-light font-sans text-5xl  text-white mb-4 ">
-                                CAN YOU
-                            </h1>
-                            <h1 className="font-extralight font-sans text-5xl  text-white mb-4 ">
-                                HEAR ME NOW?
-                            </h1>
-                        </div>
-                        <div className='text-center flex justify-center'>
-                            <p className=" font-mono text-xs font-extralight text-center w-1/3 text-white">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti unde deserunt quasi incidunt blanditiis eaque voluptates minima, voluptatem molestiae ut doloremque dolorum consequuntur, consequatur atque delectus maiores error sequi nulla? {/* Your description */}
-                            </p>
-                        </div>
-
-                    </div>
-                </section>
+             <div className="flex flex-col items-center justify-center h-[1000px] w-full  bg-green-100 p-10 ">
+                <h1 className="text-4xl font-bold">Page 1</h1>
+                <p className="mt-4 text-lg">This is the second page content.</p>
             </div>
         </>
 

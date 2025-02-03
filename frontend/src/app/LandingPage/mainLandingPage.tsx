@@ -65,9 +65,28 @@ export default function Parallax() {
     return (
         <>
             <Navbar />
-            <div className="relative w-full bg-gradient-to-r from-blue-900 to-blue-400 overflow-x-hidden"> {/* Ensure background is fixed and doesn't interfere with scrolling */}
+            <div className="relative w-full  overflow-x-hidden"> {/* Ensure background is fixed and doesn't interfere with scrolling */}
                 <div className="h-screen flex items-center justify-center z-10">
-                    <h1 className="text-5xl font-bold text-white">Welcome to My Page</h1>
+                <div className=' h-screen flex items-center justify-center'>
+                <section className=" py-14"> {/* Example Tailwind classes */}
+                    <div className="container mx-auto text-center">
+                        <div className='mb-10'>
+                            <h1 className="font-light font-sans text-5xl  text-white mb-4 ">
+                                CAN YOU
+                            </h1>
+                            <h1 className="font-extralight font-sans text-5xl  text-white mb-4 ">
+                                HEAR ME NOW?
+                            </h1>
+                        </div>
+                        <div className='text-center flex justify-center'>
+                            <p className=" font-mono text-xs font-extralight text-center w-1/3 text-white">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti unde deserunt quasi incidunt blanditiis eaque voluptates minima, voluptatem molestiae ut doloremque dolorum consequuntur, consequatur atque delectus maiores error sequi nulla? {/* Your description */}
+                            </p>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
                 </div>
 
                 {/* Scrolling Section (Starts After Static Section) */}
