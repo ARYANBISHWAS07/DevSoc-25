@@ -15,8 +15,6 @@ mp_drawing_styles = mp.solutions.drawing_styles
 
 hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.3)
 
-labels_dict = {0: 'A', 1: 'B', 2: 'L'}
-
 while True:
 
     data_aux = []
@@ -24,12 +22,11 @@ while True:
     y_ = []
 
     ret, frame = cap.read()
-
     H, W, _ = frame.shape
-
     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
     results = hands.process(frame_rgb)
+
     if results.multi_hand_landmarks:
         for hand_landmarks in results.multi_hand_landmarks:
             mp_drawing.draw_landmarks(
@@ -60,7 +57,7 @@ while True:
         y2 = int(max(y_) * H) - 10
 
         if len(data_aux) == 42:
-            
+
             prediction = model.predict([np.asarray(data_aux)])
             print(prediction)
             predicted_character = prediction[0]
