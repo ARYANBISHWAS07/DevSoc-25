@@ -1,124 +1,117 @@
-import { Container } from "./mainLandingPage";
-import Hand from "../../../public/handSize.png";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  AnimatePresence,
-} from "framer-motion";
-import Image from "next/image";
-import { useState, useEffect } from "react";
+    import { Container } from "./mainLandingPage";
+    import Hand from "../../../public/handSize.png";
+    import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+    import Image from "next/image";
+    import { useState, useEffect } from "react";
 
-export function Page2() {
-  const { scrollYProgress } = useScroll();
-  const rotate = useTransform(scrollYProgress, [0, 1], [-90, 0]);
-  const x = 600;
-  const y = 200;
-  const scale = 2.9;
+    export function Page2() {
+    const { scrollYProgress } = useScroll();
+    const rotate = useTransform(scrollYProgress, [0, 1], [-90, 0]);
+const x=100;
+const y=100;
+const scale= 2.1 ;
+    // Container variants with left-to-right staggered animation
+    const newContainerVariants = {
+        hidden: { 
+        opacity: 0, 
+        x: -100,
+        scale: 0.9, 
+        rotate: -10 
+        },
+        visible: (custom: number) => ({
+        opacity: 1,
+        x: 0,
+        scale: 1,
+        rotate: 0,
+        transition: {
+            delay: custom * 0.2,
+            duration: 0.5,
+            type: "spring",
+            stiffness: 100,
+            damping: 10
+        }
+        }),
+        exit: { 
+        opacity: 0, 
+        x: 100,
+        scale: 1.1,
+        rotate: 10,
+        transition: { 
+            duration: 0.3, 
+            ease: "easeInOut" 
+        }
+        }
+    };
 
-  const circleVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { 
-        opacity: { duration: 0.2, ease: "easeOut" },
-        scale: { duration: 0.2, type: "spring" }
-      }
-    },
-    exit: { 
-      opacity: 0, 
-      scale: 1.1,
-      transition: { 
-        opacity: { duration: 0.15, ease: "easeIn" },
-        scale: { duration: 0.15 }
-      }
-    }
-  };
+    return (
+        <Container id={2}>
+        <div className="relative flex flex-row items-center justify-center min-h-screen w-full overflow-hidden">
+            {/* Hand Image Positioned at Top */}
+        
 
-  const newContainerVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { 
-        opacity: { duration: 0.15, ease: "easeOut" },
-        scale: { duration: 0.15, type: "spring" }
-      }
-    },
-    exit: { 
-      opacity: 0, 
-      scale: 1.1,
-      transition: { 
-        opacity: { duration: 0.15, ease: "easeIn" },
-        scale: { duration: 0. }
-      }
-    }
-  };
-
-  const [replacements, setReplacements] = useState([false, false, false]);
-
-  useEffect(() => {
-    const timers = [
-      setTimeout(() => setReplacements(prev => [true, ...prev.slice(1)]), 10000),
-      setTimeout(() => setReplacements(prev => [prev[0], true, prev[2]]), 12000),
-      setTimeout(() => setReplacements(prev => [...prev.slice(0, 2), true]), 14000)
-    ];
-    return () => timers.forEach(clearTimeout);
-  }, []);
-
-  return (
-    <Container id={2}>
-      <div className="relative flex items-center justify-center h-screen w-full bg-transparent">
-        <div className="absolute inset-0 flex flex-col items-center justify-center z-0 space-y-20">
-          {[0, 1, 2].map(index => (
-            <AnimatePresence key={`circle-${index}`}>
-              {!replacements[index] ? (
+            {/* Containers Section */}
+            <div className="flex flex-col items-center justify-center z-0 space-y-16 w-full px-4">
+            {[0, 1, 2].map((index) => (
+                <AnimatePresence key={`rect-${index}`}>
                 <motion.div
-                  key={`circle${index + 1}`}
-                  variants={circleVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  className={`
-                    ${index === 0 ? 'w-[200px] h-[200px] -translate-x-8' : 
-                      index === 1 ? 'w-[150px] h-[150px]' : 
-                      'w-24 h-24 translate-x-8'} 
-                    bg-blue-200 rounded-full flex items-center justify-center 
-                    shadow-md translate-y-[-70px]
-                  `}
+                    key={`new${index + 1}`}
+                    variants={newContainerVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    custom={index}
+                    className={`
+                    ${index === 0 ? 'w-[800px] h-[180px]' : 
+                        index === 1 ? 'w-[600px] h-[180px]' : 
+                        'w-[400px] h-[180px]'}
+                    bg-gradient-to-r from-green-500 to-green-600 rounded-xl 
+                    flex items-center space-x-6 p-4 
+                    shadow-2xl shadow-green-500/50 
+                    transform transition-all duration-300 
+                    hover:scale-[1.02] hover:shadow-green-600/70
+                    `}
                 >
-                  <span className="text-sm font-semibold">Circle {index + 1}</span>
+                    {/* Image Section */}
+                    <div className="w-1/3 h-full">
+                    <img
+                        src={index === 0 ? '/images/new1.png' :
+                            index === 1 ? '/images/new2.png' :
+                            '/images/new3.png'}
+                        alt={`New Div ${index + 1}`}
+                        className="w-full h-full object-cover rounded-lg"
+                    />
+                    </div>
+                
+                    {/* Content Section */}
+                    <div className="w-2/3 px-4">
+                    <h2 className="text-white text-lg font-bold mb-2">
+                        New Div {index + 1}
+                    </h2>
+                    <p className="text-white text-sm opacity-80">
+                        Detailed description for div {index + 1}. 
+                        Additional context can be added here.
+                    </p>
+                    </div>
                 </motion.div>
-              ) : (
-                <motion.div
-                  key={`new${index + 1}`}
-                  variants={newContainerVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  className={`
-                    ${index === 0 ? 'w-[200px] h-[150px] -translate-x-8' : 
-                      index === 1 ? 'w-[150px] h-[100px]' : 
-                      'w-24 h-20 translate-x-8'} 
-                    bg-green-200 rounded-lg flex items-center justify-center 
-                    shadow-xl translate-y-[-70px]
-                  `}
-                >
-                  <span className="text-sm font-semibold">New Div {index + 1}</span>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          ))}
-        </div>
-
-        <motion.div
-          className="relative z-10 m-4"
+                
+                </AnimatePresence>
+            ))}
+            </div>
+            <motion.div
+          className="relative z-10"
           style={{ rotate, x, y, scale }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
         >
-          <Image src={Hand} alt="Hand" />
+          <Image
+            src={Hand}
+            alt="Hand"
+            layout="intrinsic"
+            width={900}
+            height={900}
+            className="object-contain w-[80vw] h-[85vh] sm:w-[75vw] sm:h-[80vh] lg:w-[70vw] lg:h-[75vh] xl:w-[65vw] xl:h-[70vh] transition-all duration-300 ease-in-out"
+          />
         </motion.div>
-      </div>
-    </Container>
-  );
-}
+        </div>
+        </Container>
+    );
+    }
