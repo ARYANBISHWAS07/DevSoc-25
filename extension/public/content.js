@@ -69,8 +69,10 @@ async function sendImageToBackend(imageData) {
         });
 
         const result = await response.json();
-        console.log(" Received prediction from backend:", result.prediction);
+        console.log(" Received prediction from backend:", result.current_word);
+        console.log("Total words:", result.final_text);
 
+        
         showPrediction(result.prediction);
     } catch (error) {
         console.error(" Error sending image to backend:", error);
