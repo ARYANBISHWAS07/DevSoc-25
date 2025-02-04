@@ -2,7 +2,7 @@ import { MOM } from "@/app/types";
 import MOMdb from "../models/meeting";
 import { NextResponse } from "next/server";
 
-export async function GET(req: Request, res: Response){
+export async function POST(req: Request, res: NextResponse){
     const respBody = await res.json();
 
   try{
