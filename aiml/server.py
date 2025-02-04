@@ -1,51 +1,82 @@
+import base64
+import time
+import pickle
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-import base64
-import cv2
 import numpy as np
-import pickle
+import cv2
 import mediapipe as mp
-from io import BytesIO
+from spellchecker import SpellChecker
+from starlette.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+
+# Load the hand sign recognition model
+model_dict = pickle.load(open('./model/new_model.p', 'rb'))
+model = model_dict['model']
+
+# Initialize Mediapipe Hands
+mp_hands = mp.solutions.hands
+hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.3)
+
+# Initialize spell checker
+spell = SpellChecker()
 
 app = FastAPI()
 
-# Allow frontend requests
+# Allow frontend requests (CORS)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins (Change this for production)
+    allow_origins=["*"],  # Allow all origins (Change for production)
     allow_credentials=True,
     allow_methods=["*"],  # Allow all methods (GET, POST, etc.)
     allow_headers=["*"],  # Allow all headers
 )
-# Load ML Model
-model_dict = pickle.load(open('./model/colab_model.p', 'rb'))
-model = model_dict['model']
 
-# Initialize MediaPipe Hands
-mp_hands = mp.solutions.hands
-mp_drawing = mp.solutions.drawing_utils
-mp_drawing_styles = mp.solutions.drawing_styles
-hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.3)
-
-# Pydantic model for request validation
 class ImageRequest(BaseModel):
-    image: str  # Base64 encoded image
+    image: str  # Base64-encoded image
 
-def process_image(image_base64):
+# State to track recognized text
+recognized_text = ""
+last_recorded_time = time.time()
+MoM_raw = ""  # Stores the final sentence
+flag = 1
+
+
+def process_image(image_data):
+    """ Decodes base64 image, processes it using Mediapipe, and updates recognized text """
+
+    global recognized_text, last_recorded_time, MoM_raw, flag
+
     try:
-        # Decode Base64 image
-        image_data = base64.b64decode(image_base64.split(",")[1])
-        np_arr = np.frombuffer(image_data, np.uint8)
-        frame = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+        # Decode base64 image
+        image_bytes = base64.b64decode(image_data.split(",")[1])
+        image_np = np.frombuffer(image_bytes, np.uint8)
+        image = cv2.imdecode(image_np, cv2.IMREAD_COLOR)
 
-        # Convert to RGB for MediaPipe
-        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        if image is None:
+            raise ValueError("Invalid image")
 
-        # Process image with MediaPipe
-        results = hands.process(frame_rgb)
+        H, W, _ = image.shape
+        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        results = hands.process(image_rgb)
 
-        # Extract hand landmarks
+        current_time = time.time()
+
+        if not results.multi_hand_landmarks:
+            # If no hand is detected for more than 2 seconds, finalize the word
+            if len(recognized_text) != 0 and current_time - last_recorded_time > 2:
+                corrected_word = spell.correction(recognized_text)
+                
+                if corrected_word:  # If spell correction is available
+                    MoM_raw += " " + corrected_word
+                # else:
+                #     MoM_raw += " " + recognized_text  # Keep original word
+                
+                recognized_text = ""  # Reset for the next word
+                last_recorded_time = current_time
+
+            return {"current_word": recognized_text, "final_text": MoM_raw.strip()}
+
         data_aux = []
         x_, y_ = [], []
 
@@ -54,6 +85,7 @@ def process_image(image_base64):
                 for i in range(len(hand_landmarks.landmark)):
                     x = hand_landmarks.landmark[i].x
                     y = hand_landmarks.landmark[i].y
+
                     x_.append(x)
                     y_.append(y)
 
@@ -64,27 +96,38 @@ def process_image(image_base64):
                     data_aux.append(y - min(y_))
 
             if len(data_aux) == 42:
-                # Make prediction
                 prediction = model.predict([np.asarray(data_aux)])
                 predicted_character = prediction[0]
-                return predicted_character
 
-        return "No hand detected"
+                # Add character to recognized text only if 0.5s has passed
+                
+                if len(recognized_text) == 0 or recognized_text[-1] != predicted_character:
+                    if not flag:
+                        recognized_text += predicted_character
+                        last_recorded_time = current_time
+                        flag = 1
+                    else:
+                        flag -= 1
+
+            return {"current_word": recognized_text, "final_text": MoM_raw.strip()}
     
     except Exception as e:
-        print(f"❌ Error processing image: {e}")
-        return "Error"
+        print("Error processing image:", str(e))
+        return {"error": str(e), "current_word": recognized_text, "final_text": MoM_raw.strip()}
+
 
 @app.post("/image")
 async def receive_image(request: ImageRequest):
-    if not request.image:
-        raise HTTPException(status_code=400, detail="No image provided")
+    """ Receives base64 image, processes it, and returns the recognized word """
 
-    # Process image and get prediction
-    prediction = process_image(request.image)
-    return {"prediction": prediction}
+    try:
+        recognized_data = process_image(request.image)
+        return JSONResponse(content=recognized_data)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
-# Run the API
+
+# Run using: uvicorn server:app --host 0.0.0.0 --port 5000
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=5000)
