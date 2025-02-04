@@ -10,7 +10,7 @@ function Footer() {
     return (
         <footer className="bg-slate-900 border-t-2 border-white py-20 ">
             <div className=" mx-8 ">
-                <div className=" flex justify-around pb-4 border-b border-b-purple-500">
+                <div className=" flex justify-around pb-6 border-b border-b-purple-500">
                     <div className="text-4xl font-mono font-bold text-purple-800"><span><Ear className="inline-block size-8"/></span>ECHOSIGN</div>
                     <div className="invisible">
                         hello
