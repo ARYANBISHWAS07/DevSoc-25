@@ -110,7 +110,7 @@ export function DataTable() {
 
     return (
         <div className="w-[80vw] border-b-2 max-w-4xl mx-auto py-3.5">
-            <div className="flex items-center m-4">
+            <div className="flex items-center m-4 pb-4">
                 <Input
                     placeholder={`Filter by ${filterField}...`}
                     value={(table.getColumn(filterField)?.getFilterValue() as string) ?? ""}
@@ -145,7 +145,7 @@ export function DataTable() {
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>
-            <div className="rounded-md border border-gray-300 shadow-md overflow-hidden">
+            <div className="rounded-md border border-gray-300 shadow-md overflow-hidden mb-4">
                 <Table>
                     <TableHeader className="text-white">
                         {table.getHeaderGroups().map((headerGroup) => (

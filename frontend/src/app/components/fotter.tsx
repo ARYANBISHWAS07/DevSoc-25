@@ -5,6 +5,8 @@ import { Youtube } from 'lucide-react';
 import { Linkedin } from 'lucide-react';
 import { Atom } from 'lucide-react';
 import { Ear } from 'lucide-react';
+import { Facebook } from 'lucide-react';
+import { Copyright } from 'lucide-react';
 
 function Footer() {
     return (
@@ -31,12 +33,12 @@ function Footer() {
                             hello
                         </div>
                         <ul className="font-mono leading-8 text-lg">
-                            <li className="pb-4 text-xl font-semibold text-purple-800 opacity-90">SOCIALS</li>
-                            <li className="text-purple-500">DaddyVD</li>
-                            <li className="text-purple-500">BAKWAS</li>
-                            <li className="text-purple-500">KALA JADU</li>
-                            <li className="text-purple-500">GUNDA</li>
-                            <li className="text-purple-500">GJASUNDAY</li>
+                            <li className="pb-4 text-xl font-semibold text-purple-800 opacity-90"><span className="pr-1"><Instagram className="inline-block pb-1" /></span>SOCIALS</li>
+                            <li className="text-purple-500">vansh_277</li>
+                            <li className="text-purple-500">aryanbishwas</li>
+                            <li className="text-purple-500">somewhere.who.knows</li>
+                            <li className="text-purple-500">varshit.kumar</li>
+                            <li className="text-purple-500">aditya_fatneek</li>
                         </ul>
                         <div className="invisible">
                             hello
@@ -45,20 +47,20 @@ function Footer() {
 
                 </div>
                 <div className="px-8 pt-6 flex justify-between">
-                    <div className=" text-xl text-purple-600 font-sans">
+                    <div className=" text-l text-purple-600 font-sans">
                         LETS CONNECT TO DEEPER LEVELS
                     </div>
                     <div className="invisible">
 
                     </div>
-                    <div className="flex gap-8 pr-2">
-                        <Instagram color="#8E24AA" />
+                    <div className="flex gap-8 pr-44">
+                        <Facebook color="#8E24AA" />
                         <Aperture color="#8E24AA" />
                         <Youtube color="#8E24AA" />
                         <Atom color="#8E24AA" />
                     </div>
-                    <div className=" text-xl text-purple-600 font-sans">
-                        WE SHALL SUE IF USED WITHOUT PERMISSION COPYRIGHT!!
+                    <div className=" text-l text-purple-600 font-sans mr-1">
+                    <span className="pr-1"><Copyright className="inline-block pb-1" /></span>2025 ECHOSIGN UI.All rights reserved.
                     </div>
                 </div>
 

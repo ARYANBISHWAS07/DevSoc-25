@@ -88,10 +88,10 @@ export default function Parallax() {
                                 </div>
                                 <div className='w-[100%] text-center flex  flex-col justify-center item-center text-lg'>
                                     <p className=" font-mono text-lg font-extralight text-center text-white">
-                                        studying asl promotes awareness of and sensitivity to the deaf and hard
+                                        Studying ASL promotes awareness of and sensitivity to the deaf and hard
                                     </p>
                                     <p className=" font-mono text-lg font-extralight text-center text-white">
-                                        of hearing community. bridge is all you need to communicate with deaf and hard
+                                        of hearing community. Bridge is all you need to communicate with deaf and hard
                                     </p>
                                     <p className=" font-mono text-lg font-extralight text-center  text-white">
                                         of hearing people.

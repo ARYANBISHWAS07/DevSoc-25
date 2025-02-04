@@ -2,7 +2,7 @@
 import {DataTable} from "@/contents-ui/table";
 import {Clock,NotebookPen} from "lucide-react";
 import {ChartComponent} from "@/contents-ui/graph";
-import Navbar from "@/app/navbar";
+import Navbartwo from "../components/nav2";
 import Footer from "../components/fotter";
 
 
@@ -10,7 +10,7 @@ export default function Page() {
     return (
         <>
         <div className="mb-10">
-            <Navbar />
+            <Navbartwo />
             <div className="mt-40 mb-5 justify-center items-center ">
                 <div className=" shadow-gray-200 w-full justify-center items-center flex h-[20vh] ">
                     <p className="text-white font-bold font-serif text-4xl">
