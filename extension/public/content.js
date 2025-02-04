@@ -33,6 +33,12 @@ async function startCapture() {
         canvas = document.createElement("canvas");
         ctx = canvas.getContext("2d");
 
+        // Store meeting start time in chrome.storage.local
+        const startTime = new Date().toISOString();
+        chrome.storage.local.set({ meetingStartTime: startTime }, () => {
+            console.log("Meeting Start Time Stored:", startTime);
+        });
+
         videoElem.onloadedmetadata = () => {
             console.log("Video loaded, sending frames to backend...");
 
@@ -72,7 +78,6 @@ async function sendImageToBackend(imageData) {
         console.log(" Received prediction from backend:", result.current_word);
         console.log("Total words:", result.final_text);
 
-        
         showPrediction(result.prediction);
     } catch (error) {
         console.error(" Error sending image to backend:", error);
@@ -100,16 +105,62 @@ function showPrediction(predictedCharacter) {
     predictionElem.innerText = `Predicted Sign: ${predictedCharacter}`;
 }
 
-// Stop capture
+// Stop capture and send MOM data to backend
 function stopCapture() {
     console.log("Stopping capture");
-    if (videoElem && videoElem.srcObject) {
-        let tracks = videoElem.srcObject.getTracks();
-        tracks.forEach(track => track.stop());
-        videoElem.srcObject = null;
-        videoElem.remove();
-        videoElem = null;
-    }
+    
+    chrome.storage.local.get("meetingStartTime", (data) => {
+        const startTime = data.meetingStartTime ? new Date(data.meetingStartTime) : null;
+        const endTime = new Date();
+        let meetingDuration = 0;
+
+        if (startTime) {
+            meetingDuration = Math.floor((endTime - startTime) / 1000 / 60); // Convert milliseconds to minutes
+            console.log("Meeting Duration (minutes):", meetingDuration);
+        } else {
+            console.warn("Meeting Start Time Not Found");
+        }
+
+        chrome.storage.sync.get("email", async (emailData) => {
+            console.log("User email:", emailData.email);
+            const email = emailData.email || "unknown@example.com"; // Default if email is not found
+
+            if (videoElem && videoElem.srcObject) {
+                let tracks = videoElem.srcObject.getTracks();
+                tracks.forEach(track => track.stop());
+                videoElem.srcObject = null;
+                videoElem.remove();
+                videoElem = null;
+            }
+
+            // Prepare MOM data
+            const momData = {
+                email: email,
+                meeting_date: startTime ? startTime.toISOString().split("T")[0] : endTime.toISOString().split("T")[0], // Extract YYYY-MM-DD
+                meeting_time: startTime ? startTime.toLocaleTimeString() : endTime.toLocaleTimeString(),
+                meeting_duration: meetingDuration, // Calculated duration
+            };
+
+            try {
+                console.log("Sending MOM data to backend...");
+                const response = await fetch("http://localhost:5000/sendmom", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(momData)
+                });
+
+                const result = await response.json();
+                console.log("MOM saved response:", result);
+            } catch (error) {
+                console.error("Error sending MOM data to backend:", error);
+            }
+        });
+
+        // Remove the start time from storage after sending the data
+        chrome.storage.local.remove("meetingStartTime");
+    });
 }
 
 // Listen for messages from popup.js
