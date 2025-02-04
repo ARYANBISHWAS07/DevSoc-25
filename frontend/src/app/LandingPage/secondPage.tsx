@@ -1,5 +1,9 @@
 import { Container } from "./mainLandingPage";
 import Hand from "../../../public/handSize.png";
+import user from "../../../public/user.png";
+import translate from "../../../public/translate.png";
+import business from "../../../public/business.png"
+import first from "../../../public/first.png";
 import { motion, useScroll, useTransform, AnimatePresence, useAnimation } from "framer-motion";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -18,22 +22,22 @@ export function Page2() {
   // Array of descriptions for each container
   const descriptions = [
     {
-      title: "New Div 1",
+      title: "Sign Language Translation",
       description:
         "This is the first container. It provides an overview of the features and benefits of the product.",
-      image: "/images/new1.png",
+      image: translate,
     },
     {
-      title: "New Div 2",
+      title: "Meeting Minutes Creation",
       description:
         "This is the second container. It highlights the key functionalities and use cases.",
-      image: "/images/new2.png",
+      image: business,
     },
     {
-      title: "New Div 3",
+      title: "User Information Management",
       description:
         "This is the third container. It showcases customer testimonials and success stories.",
-      image: "/images/new3.png",
+      image: user,
     },
   ];
 
@@ -129,11 +133,11 @@ export function Page2() {
                     `}
               >
                 {/* Image Section */}
-                <div className="w-1/3 h-full">
-                  <img
+                <div className="w-[30%] h-full resize">
+                  <Image
                     src={item.image}
                     alt={`New Div ${index + 1}`}
-                    className="w-full h-full object-cover rounded-lg"
+                    className="w-full h-full object-cover rounded-lg resize"
                   />
                 </div>
 
