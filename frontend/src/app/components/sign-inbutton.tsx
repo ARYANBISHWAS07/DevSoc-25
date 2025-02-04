@@ -1,4 +1,5 @@
 "use client"
+import { Button } from "@/components/ui/button";
 import  SignIn from "../(auth)/authactions/sign-in"
 
 
@@ -11,8 +12,8 @@ export default function SignInButton() {
         }
     }
     return (
-        <button onClick={handleSignIn} type="submit" className=" p-5 w-[12vw] border-4 border-[#9B52E0] rounded-full font-bold">
+        <Button onClick={handleSignIn} type="submit" variant="outline" className="w-full">
             Signin with Google
-        </button>
+        </Button>
     )
 }
