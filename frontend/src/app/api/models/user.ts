@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-// import bcrypt from "bcrypt";
-const SALT_I = 10;
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: false },
@@ -9,8 +7,6 @@ const userSchema = new mongoose.Schema({
   googleId: { type: String, required: false },
   authType: { type: String, enum: ["google", "local"], required: true },
 });
-
-// userSchema.pre("save", function (next) {
 //   var user = this;
 //   if (user.isModified("password")) {
 //     bcrypt.genSalt(SALT_I, function (err, salt) {

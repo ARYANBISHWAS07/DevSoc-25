@@ -31,10 +31,17 @@ export async function POST(req: NextRequest, res: NextResponse) {
         }
         if(authType=="local"){
             const user = await User.findOne({ email});
-            if(!user) return NextResponse.json({ error: "User doesn't exists" },{status: 401});
-            if(user.password==password){
-                return NextResponse.json({ message: "Logged In Successfully" }, { status: 200 });
-            }
+            if(user) return NextResponse.json({ error: "User already exists" },{status: 400});
+
+            const hashedPassword = password
+            const newUser = new User({
+                email,
+                password: hashedPassword,
+                authType
+            });
+
+            await newUser.save();
+            return NextResponse.json({ message: "User created successfully" }, { status: 201 });
         }
     }catch{
         return NextResponse.json({ error: "Internal Server Error" },{status: 500});
