@@ -9,16 +9,17 @@ import Footer from "../components/fotter";
 export default function Page() {
     return (
         <>
-        <div className="mb-10">
+        <div className="mb-20">
             <Navbar />
-            <div className="mt-40 mb-5 justify-center items-center ">
-                <div className=" shadow-gray-200 w-full justify-center items-center flex h-[20vh] ">
+            <div className="mt-20 mb-5 justify-center items-center ">
+                <div className=" shadow-gray-200 w-full justify-center items-center flex h-[20vh] pr-10 ">
                     <p className="text-white font-bold font-serif text-4xl">
                         Welcome in, Vansh Dhir
                     </p>
                 </div>
+       
                 <div
-                    className="flex items-center justify-around border-4 border-blue-800 w-[35vw] m-10 h-[22vh] ml-[30vw] rounded-full bg-blue-50/10 shadow-blue-800/50 backdrop-blur-lg">
+                    className="flex items-center justify-around border-4 border-blue-800 w-[35vw] mt-5 mb-[85px] h-[22vh] ml-[30vw] rounded-full bg-blue-50/10 shadow-blue-800/50 backdrop-blur-lg mr-10">
                     <div className="flex flex-col items-center justify-center">
                         <Clock size={50} className="text-blue-800"/>
                         <h1 className="font-bold text-blue-900">Total Meets:</h1>
@@ -32,6 +33,7 @@ export default function Page() {
                         <p className="text-xl font-semibold text-blue-900">17 Hr 50 Min</p>
                     </div>
                 </div>
+
                 <div className="flex justify-center">
                     <ChartComponent/>
                 </div>
