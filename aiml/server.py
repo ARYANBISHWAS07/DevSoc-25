@@ -11,11 +11,13 @@ from starlette.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 # Load the hand sign recognition model
-model_dict = pickle.load(open('./model/new_model.p', 'rb'))
+model_dict = pickle.load(open('./model/last_model.p', 'rb'))
 model = model_dict['model']
 
 # Initialize Mediapipe Hands
 mp_hands = mp.solutions.hands
+mp_drawing = mp.solutions.drawing_utils
+mp_drawing_styles = mp.solutions.drawing_styles
 hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.3)
 
 # Initialize spell checker
@@ -40,12 +42,13 @@ recognized_text = ""
 last_recorded_time = time.time()
 MoM_raw = ""  # Stores the final sentence
 flag = 1
+count = 1
 
 
 def process_image(image_data):
     """ Decodes base64 image, processes it using Mediapipe, and updates recognized text """
 
-    global recognized_text, last_recorded_time, MoM_raw, flag
+    global recognized_text, last_recorded_time, MoM_raw, flag, count
 
     try:
         # Decode base64 image
@@ -82,6 +85,14 @@ def process_image(image_data):
 
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
+                mp_drawing.draw_landmarks(
+                    image,  
+                    hand_landmarks,  
+                    mp_hands.HAND_CONNECTIONS,  
+                    mp_drawing_styles.get_default_hand_landmarks_style(),
+                    mp_drawing_styles.get_default_hand_connections_style())
+            
+            for hand_landmarks in results.multi_hand_landmarks:
                 for i in range(len(hand_landmarks.landmark)):
                     x = hand_landmarks.landmark[i].x
                     y = hand_landmarks.landmark[i].y
@@ -95,11 +106,28 @@ def process_image(image_data):
                     data_aux.append(x - min(x_))
                     data_aux.append(y - min(y_))
 
+            x1 = int(min(x_) * W) - 10
+            y1 = int(min(y_) * H) - 10
+
+            x2 = int(max(x_) * W) - 10
+            y2 = int(max(y_) * H) - 10
+
             if len(data_aux) == 42:
                 prediction = model.predict([np.asarray(data_aux)])
-                predicted_character = prediction[0]
-
+                predicted_character = prediction[0][0]
+                
+                print(predicted_character)
                 # Add character to recognized text only if 0.5s has passed
+                
+                cv2.rectangle(image, (x1, y1), (x2, y2), (0, 0, 0), 4)
+                cv2.putText(
+                    image,
+                    predicted_character,
+                    (x1, y1 - 10),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    1.3, (0, 0, 0), 3,
+                    cv2.LINE_AA
+                )
                 
                 if len(recognized_text) == 0 or recognized_text[-1] != predicted_character:
                     if not flag:
@@ -108,7 +136,8 @@ def process_image(image_data):
                         flag = 1
                     else:
                         flag -= 1
-
+            cv2.imwrite(f'./images/{count}.jpg',image)
+            count += 1
             return {"current_word": recognized_text, "final_text": MoM_raw.strip()}
     
     except Exception as e:

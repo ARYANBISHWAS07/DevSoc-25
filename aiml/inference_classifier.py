@@ -4,7 +4,7 @@ import cv2
 import mediapipe as mp
 import numpy as np
 
-model_dict = pickle.load(open('./model/new_model.p', 'rb'))
+model_dict = pickle.load(open('./model/last_model.p', 'rb'))
 model = model_dict['model']
 
 cap = cv2.VideoCapture(0)
@@ -22,6 +22,7 @@ while True:
     y_ = []
 
     ret, frame = cap.read()
+    frame = cv2.flip(frame, 1)  # Flip the frame horizontally for a better view
     H, W, _ = frame.shape
     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
@@ -60,7 +61,7 @@ while True:
 
             prediction = model.predict([np.asarray(data_aux)])
             print(prediction)
-            predicted_character = prediction[0]
+            predicted_character = prediction[0][0]
 
             cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 0), 4)
             cv2.putText(

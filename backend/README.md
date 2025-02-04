@@ -1,4 +1,4 @@
-# Project devsoc
+# Project backend
 
 One Paragraph of project description goes here
 
