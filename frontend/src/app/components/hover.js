@@ -1,14 +1,19 @@
 import { LocaleRouteNormalizer } from 'next/dist/server/normalizers/locale-route-normalizer';
+import Image from 'next/image';
 import React, { useEffect } from 'react';
-
+import Hand from '../../../public/hand.jpg';  
+import user from "../../../public/user.png" 
+import first from "../../../public/first.png";
+import second from "../../../public/second.png";
+import third from "../../../public/third.png";
 function GridWithHover() {
     const gridItemsData = [
-        { letter: 'CAUSE 1', details: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti unde deserunt quasi incidunt blanditiis eaque voluptates minima, voluptatem molestiae ut doloremque dolorum consequuntur, consequatur atque delectus maiores error sequi nulla?' },
-        { letter: 'CAUSE 2', details: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti unde deserunt quasi incidunt blanditiis eaque voluptates minima, voluptatem molestiae ut doloremque dolorum consequuntur, consequatur atque delectus maiores error sequi nulla?' },
-        { letter: 'CAUSE 3', details: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti unde deserunt quasi incidunt blanditiis eaque voluptates minima, voluptatem molestiae ut doloremque dolorum consequuntur, consequatur atque delectus maiores error sequi nulla?' },
-        { letter: 'CAUSE 4', details: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti unde deserunt quasi incidunt blanditiis eaque voluptates minima, voluptatem molestiae ut doloremque dolorum consequuntur, consequatur atque delectus maiores error sequi nulla?' },
-        { letter: 'CAUSE 5', details: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti unde deserunt quasi incidunt blanditiis eaque voluptates minima, voluptatem molestiae ut doloremque dolorum consequuntur, consequatur atque delectus maiores error sequi nulla?' },
-        { letter: 'CAUSE 6', details: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti unde deserunt quasi incidunt blanditiis eaque voluptates minima, voluptatem molestiae ut doloremque dolorum consequuntur, consequatur atque delectus maiores error sequi nulla?' },
+        { img:first,letter: ' Communication Barriers', details: 'Difficulty in expressing needs, emotions, and thoughts.Limited access to effective communication tools like sign language interpreters or speech devices.Misunderstanding by others, leading to frustration.' },
+        { img:second, letter: 'Social Isolation & Discrimination ', details: 'Difficulty in making friends or forming relationships due to communication challenges.Being ignored or treated unfairly in social and professional settings.Bullying or stigma attached to their condition.' },
+        { img:third ,letter: 'Limited Educational & Job Opportunities ', details: 'Lack of inclusive teaching methods in schools.Fewer job opportunities due to communication difficulties.Workplaces may not provide assistive technologies like text-to-speech tools.' },
+        { letter: ' Accessibility Issues', details: 'Public places, hospitals, and government offices often lack accommodations for non-verbal individuals.Emergency services (e.g., calling 911) are hard to access without text-based support.' },
+        { letter: 'Emotional & Psychological Impact ', details: 'Feeling of helplessness or frustration when unable to express themselves.Increased risk of anxiety, depression, or low self-esteem.Dependence on family members for communication.' },
+        { letter: 'Difficulty in Emergency Situations', details: 'Inability to quickly call for help in medical or safety emergencies.Lack of emergency services equipped to handle non-verbal communication.Risk of being misunderstood or ignored in urgent situations.' },
     ];  
 
     useEffect(() => {
@@ -46,14 +51,18 @@ function GridWithHover() {
     }, []);
 
     return (
-        <div className="relative grid grid-cols-3 gap-4 h-[90vh] mb-16 mt-12  shadow-md rounded-md " id="mainCard">
+        <div className="relative grid grid-cols-3 gap-4 h-[90vh] mb-16 mt-12  shadow-lg rounded-lg " id="mainCard">
             {gridItemsData.map((item, index) => (
                 <div
                     key={index}
                     className={`group relative transition-all duration-300 ease-in-out rounded-md overflow-hidden ${index % 2 === 0 ? '' : 'bg-sky-200' // Alternating background
                         }`}
                 >
-                    <div className="p-4 h-full flex items-center justify-center"> {/* Removed bg-gray-200 here */}
+                    <div className="p-2 h-full flex items-center justify-center"> {/* Removed bg-gray-200 here */}
+                        <span className='text-2xl font-mono font-medium transition-opacity duration-300 group-hover:opacity-0'>
+                            <Image src={item.img} className='w-[90%]'/>
+
+                        </span>
                         <span className="text-2xl font-mono font-medium transition-opacity duration-300 group-hover:opacity-0">
                             {item.letter}
                         </span>
