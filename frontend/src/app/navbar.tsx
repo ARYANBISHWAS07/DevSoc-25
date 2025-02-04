@@ -3,7 +3,7 @@
 import OneLogo from "@/app/components/logo2";
 import Link from "next/link";
 import { useState, useEffect } from 'react';
-import { House, LayoutDashboard } from 'lucide-react';
+import { House, LayoutDashboard,LogIn,SquareUserRound } from 'lucide-react';
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -28,7 +28,7 @@ const Navbar = () => {
             <div>
                 <OneLogo />
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-between ml-72">
                 <ul className="flex flex-row gap-6 text-lg font-semibold">
                     {[
                         { icon: <House className="w-5 h-5" />, name: "Home", path: "/" },
@@ -45,9 +45,28 @@ const Navbar = () => {
                         </li>
                     ))}
                 </ul>
+                
             </div>
+            <div className="flex ">
             <div className="w-[100px] invisible">
                 <h1>hello</h1>
+                </div>
+                <ul className="flex flex-row gap-6 text-lg font-semibold">
+                    {[
+                        {icon:<LogIn className="w-5 h-5"/>,name:"Login",path:"/auth/login"},
+                        {icon:<SquareUserRound className="w-5 h-5"/>,name:"SignUp",path:"/auth/signup"},
+                    ].map(({ name, path, icon }) => (
+                        <li key={name}>
+                            <Link
+                                href={path}
+                                className="flex items-center gap-2 px-5 py-2 rounded-lg border border-transparent transition-all duration-300 ease-in-out bg-white/10 hover:bg-white/20 hover:shadow-lg hover:shadow-white hover:border-white/50"
+                            >
+                                {icon}
+                                <span>{name}</span>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
             </div>
         </nav>
     );
