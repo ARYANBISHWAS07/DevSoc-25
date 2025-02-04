@@ -15,6 +15,7 @@ import {
 import { useRef } from "react";
 import Navbar from "../navbar";
 import StepsProgress from "./thirdPage";
+import Footer from '../components/fotter';
 
 // Define the type for the useParallax hook
 export function useParallax(value: MotionValue<number>, distance: number) {
@@ -66,7 +67,7 @@ export default function Parallax() {
         <>
             <Navbar />
 
-            <div className="relative w-full  overflow-x-hidden "> {/* Ensure background is fixed and doesn't interfere with scrolling */}
+            <div className="relative w-full  overflow-x-hidden"> {/* Ensure background is fixed and doesn't interfere with scrolling */}
                 <div className="h-screen flex items-center justify-center z-10">
                     <div className=' h-screen flex items-center justify-center'>
 
@@ -111,7 +112,7 @@ export default function Parallax() {
                     style={{ scaleX }}
                 />
             </div>
-
+            <Footer />
         </>
     );
 }
