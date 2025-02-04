@@ -67,13 +67,13 @@ export default function Parallax() {
         <>
             <Navbar />
 
-            <div className="relative w-full  overflow-x-hidden"> {/* Ensure background is fixed and doesn't interfere with scrolling */}
+            <div className="relative w-full  overflow-x-hidden "> {/* Ensure background is fixed and doesn't interfere with scrolling */}
                 <div className="h-screen flex items-center justify-center z-10">
                     <div className=' h-screen flex items-center justify-center'>
 
                         <section className=" py-14"> {/* Example Tailwind classes */}
                             <div className="container mx-auto text-center mb-20">
-                                <div className="flex flex-row justify-center mb-10 mr-16" >
+                                <div className="flex flex-row justify-center mb-10 mr-16 mt-48" >
                                     <img src="new.png"
                                         className="max-w-[50%] mx-auto"
                                         alt="" />
