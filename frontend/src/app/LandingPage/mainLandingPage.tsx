@@ -67,16 +67,16 @@ export default function Parallax() {
         <>
             <Navbar />
 
-            <div className="relative w-full  overflow-x-hidden"> {/* Ensure background is fixed and doesn't interfere with scrolling */}
+            <div className="relative w-full  overflow-x-hidden "> {/* Ensure background is fixed and doesn't interfere with scrolling */}
                 <div className="h-screen flex items-center justify-center z-10">
                     <div className=' h-screen flex items-center justify-center'>
 
                         <section className=" py-14"> {/* Example Tailwind classes */}
                             <div className="container mx-auto text-center mb-20">
-                                <div className="flex flex-row justify-center mb-10 mr-16" >
+                                <div className="flex flex-row justify-center mb-10 mr-16 mt-48" >
                                     <img src="new.png"
-                                        className="max-w-[50%] mx-auto"
-                                        alt="" />
+                                        className="max-w-[70%] mx-auto"
+                                        alt="fingers" />
                                 </div>
                                 <div className='mb-10'>
                                     <h1 className="font-light font-sans text-5xl  text-white mb-4 ">
@@ -86,9 +86,15 @@ export default function Parallax() {
                                         HEAR ME NOW?
                                     </h1>
                                 </div>
-                                <div className='text-center flex justify-center'>
-                                    <p className=" font-mono text-xs font-extralight text-center w-1/3 text-white">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti unde deserunt quasi incidunt blanditiis eaque voluptates minima, voluptatem molestiae ut doloremque dolorum consequuntur, consequatur atque delectus maiores error sequi nulla? {/* Your description */}
+                                <div className='w-[100%] text-center flex  flex-col justify-center item-center text-lg'>
+                                    <p className=" font-mono text-lg font-extralight text-center text-white">
+                                        studying asl promotes awareness of and sensitivity to the deaf and hard
+                                    </p>
+                                    <p className=" font-mono text-lg font-extralight text-center text-white">
+                                        of hearing community. bridge is all you need to communicate with deaf and hard
+                                    </p>
+                                    <p className=" font-mono text-lg font-extralight text-center  text-white">
+                                        of hearing people.
                                     </p>
                                 </div>
 
@@ -108,7 +114,7 @@ export default function Parallax() {
 
                 {/* Bottom Animation (Fixed Position) */}
                 <motion.div
-                    className="fixed bottom-0 left-0 h-2 bg-gradient-to-t from-blue-500 to-slate-700 origin-center w-full z-30"
+                    className="fixed bottom-0 left-0 h-2 bg-gradient-to-t from-blue-500 to-slate-700 origin-center w-full z-30 rounded-lg"
                     style={{ scaleX }}
                 />
             </div>

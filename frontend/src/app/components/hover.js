@@ -9,10 +9,10 @@ import third from "../../../public/third.png";
 function GridWithHover() {
     const gridItemsData = [
         { img:first,letter: ' Communication Barriers', details: 'Difficulty in expressing needs, emotions, and thoughts.Limited access to effective communication tools like sign language interpreters or speech devices.Misunderstanding by others, leading to frustration.' },
-        { img:second, letter: 'Social Isolation & Discrimination ', details: 'Difficulty in making friends or forming relationships due to communication challenges.Being ignored or treated unfairly in social and professional settings.Bullying or stigma attached to their condition.' },
-        { img:third ,letter: 'Limited Educational & Job Opportunities ', details: 'Lack of inclusive teaching methods in schools.Fewer job opportunities due to communication difficulties.Workplaces may not provide assistive technologies like text-to-speech tools.' },
+        { letter: 'Social Isolation & Discrimination ', details: 'Difficulty in making friends or forming relationships due to communication challenges.Being ignored or treated unfairly in social and professional settings.Bullying or stigma attached to their condition.' },
+        { img:third,letter: 'Limited Educational & Job Opportunities ', details: 'Lack of inclusive teaching methods in schools.Fewer job opportunities due to communication difficulties.Workplaces may not provide assistive technologies like text-to-speech tools.' },
         { letter: ' Accessibility Issues', details: 'Public places, hospitals, and government offices often lack accommodations for non-verbal individuals.Emergency services (e.g., calling 911) are hard to access without text-based support.' },
-        { letter: 'Emotional & Psychological Impact ', details: 'Feeling of helplessness or frustration when unable to express themselves.Increased risk of anxiety, depression, or low self-esteem.Dependence on family members for communication.' },
+        { img:second,letter: 'Emotional & Psychological Impact ', details: 'Feeling of helplessness or frustration when unable to express themselves.Increased risk of anxiety, depression, or low self-esteem.Dependence on family members for communication.' },
         { letter: 'Difficulty in Emergency Situations', details: 'Inability to quickly call for help in medical or safety emergencies.Lack of emergency services equipped to handle non-verbal communication.Risk of being misunderstood or ignored in urgent situations.' },
     ];  
 
@@ -63,7 +63,7 @@ function GridWithHover() {
                             <Image src={item.img} className='w-[90%]'/>
 
                         </span>
-                        <span className="text-2xl font-mono font-medium transition-opacity duration-300 group-hover:opacity-0">
+                        <span className="text-2xl font-mono font-bold transition-opacity duration-300 group-hover:opacity-0">
                             {item.letter}
                         </span>
                         <span className="opacity-0 absolute inset-0 flex items-center text-center font-mono font-light justify-center text-base transition-opacity duration-300 group-hover:opacity-100 gorup-hover:shadow-sm ">

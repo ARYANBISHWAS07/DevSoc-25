@@ -11,14 +11,14 @@ export default function Page() {
         <>
         <div className="mb-10">
             <Navbar />
-            <div className="mt-40 mb-10">
-                <div className="ml-[29vw] shadow-gray-200">
+            <div className="mt-40 mb-5 justify-center items-center ">
+                <div className=" shadow-gray-200 w-full justify-center items-center flex h-[20vh] ">
                     <p className="text-white font-bold font-serif text-4xl">
                         Welcome in, Vansh Dhir
                     </p>
                 </div>
                 <div
-                    className="flex items-center justify-around border-4 border-blue-800 w-[35vw] m-4 h-[22vh] ml-[30vw] rounded-full bg-blue-50/10 shadow-blue-800/50 backdrop-blur-lg">
+                    className="flex items-center justify-around border-4 border-blue-800 w-[35vw] m-10 h-[22vh] ml-[30vw] rounded-full bg-blue-50/10 shadow-blue-800/50 backdrop-blur-lg">
                     <div className="flex flex-col items-center justify-center">
                         <Clock size={50} className="text-blue-800"/>
                         <h1 className="font-bold text-blue-900">Total Meets:</h1>
