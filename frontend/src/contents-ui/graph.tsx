@@ -24,12 +24,12 @@ const chartData = [
 export function ChartComponent() {
     return (
         <div className="ml-[40vw]">
-        <Card className="w-[80vw] bg-blue-300 max-w-md mx-auto dark:bg-gray-900  rounded-10xl p-4">
-            <CardHeader className="pb-2">
-                <CardTitle className="text-base font-semibold text-gray-800 dark:text-white">
+        <Card className="w-[80vw] bg-blue-300 max-w-md mx-auto dark:bg-gray-900  rounded-lg p-4">
+            <CardHeader className="pb-2 ">
+                <CardTitle className="text-base font-bold text-gray-800 dark:text-white">
                     Weekly Meeting Timings(in mins)
                 </CardTitle>
-                <CardDescription className="text-xs text-gray-500 dark:text-gray-400">
+                <CardDescription className="text-xs text-slate-900 dark:text-gray-400 ">
                     Visitor statistics for this week (in minutes)
                 </CardDescription>
             </CardHeader>
@@ -63,13 +63,13 @@ export function ChartComponent() {
                     </LineChart>
                 </ResponsiveContainer>
             </CardContent>
-            <CardFooter className="flex flex-col items-start gap-1 text-xs text-gray-600 dark:text-gray-400">
-                <div className="flex items-center gap-1 text-sm font-medium text-gray-800 dark:text-white">
-                    Trending up by 5.2% this week
-                    <TrendingUp className="h-4 w-4 text-green-500" />
-                </div>
-                <div className="text-xs">Data is collected from real-time user analytics.</div>
-            </CardFooter>
+                {/* <CardFooter className="flex flex-col items-start gap-1 text-xs text-gray-600 dark:text-gray-400">
+                    <div className="flex items-center gap-1 text-sm font-medium text-gray-800 dark:text-white">
+                        Trending up by 5.2% this week
+                        <TrendingUp className="h-4 w-4 text-green-500" />
+                    </div>
+                    <div className="text-xs">Data is collected from real-time user analytics.</div>
+                </CardFooter> */}
         </Card>
         </div>
     )
