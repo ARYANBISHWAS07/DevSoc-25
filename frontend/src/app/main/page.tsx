@@ -1,14 +1,17 @@
-import Navbar from "@/app/navbar";
+
 import {DataTable} from "@/contents-ui/table";
 import {Clock,NotebookPen} from "lucide-react";
 import {ChartComponent} from "@/contents-ui/graph";
+import Navbar from "@/app/navbar";
+import Footer from "../components/fotter";
 
 
 export default function Page() {
     return (
-        <div>
-            <Navbar/>
-            <div className="mt-4">
+        <>
+        <div className="mb-10">
+            <Navbar />
+            <div className="mt-40 mb-10">
                 <div className="ml-[29vw] shadow-gray-200">
                     <p className="text-white font-bold font-serif text-4xl">
                         Welcome in, Vansh Dhir
@@ -35,5 +38,7 @@ export default function Page() {
             </div>
             <DataTable/>
         </div>
+        <Footer/>
+        </>
     );
 }
