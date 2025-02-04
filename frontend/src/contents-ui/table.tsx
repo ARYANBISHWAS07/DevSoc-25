@@ -109,8 +109,8 @@ export function DataTable() {
     }
 
     return (
-        <div className="w-[80vw] border-b-2 max-w-4xl mx-auto py-3.5">
-            <div className="flex items-center m-4 pb-4">
+        <div className="w-[80vw] border-b-2 max-w-4xl mx-auto py-3.5 ">
+            <div className="flex items-center m-4">
                 <Input
                     placeholder={`Filter by ${filterField}...`}
                     value={(table.getColumn(filterField)?.getFilterValue() as string) ?? ""}
@@ -119,7 +119,7 @@ export function DataTable() {
                 />
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <Button variant="outline" className="ml-auto">
+                        <Button variant="outline" className="ml-auto mb-10">
                             Filter by <ChevronDown className="ml-2" />
                         </Button>
                     </DropdownMenuTrigger>

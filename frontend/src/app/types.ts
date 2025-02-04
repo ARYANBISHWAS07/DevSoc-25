@@ -1,13 +1,13 @@
 export type AuthResp = {
-    name?: String,
-    email: String
-    password?: String,
-    googleId?: String,
+    name?: string,
+    email: string
+    password?: string,
+    googleId?: string,
     authType: "google" | "local",
 }
 
 export type MOM = {
-    email: String
+    email: string
 }
 
 export type MOMType = {
