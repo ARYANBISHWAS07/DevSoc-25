@@ -1,88 +1,73 @@
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.chat_history import BaseChatMessageHistory, InMemoryChatMessageHistory
+from langchain_core.runnables.history import RunnableWithMessageHistory
+from langchain.schema import HumanMessage, AIMessage
 
 load_dotenv()
 ai_key = os.getenv("GEMINI_API_KEY")
 
-from langchain.chains.summarize import load_summarize_chain
-from langchain.docstore.document import Document
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain.prompts import PromptTemplate
-from langchain.text_splitter import CharacterTextSplitter
-
-target_len = 500
-chunk_size = 3000
-chunk_overlap = 200
-
-text_splitter = CharacterTextSplitter(
-    chunk_size=chunk_size,
-    chunk_overlap=chunk_overlap,
-    length_function=len,
-)
-
-model = ChatGoogleGenerativeAI(
+llm = ChatGoogleGenerativeAI(
     model="gemini-1.5-flash",
-    temperature=0.75,
-    top_p=0.5,
+    temperature=0.63,
+    top_p=0.62,
     api_key=ai_key
 )
 
-prompt_template = """Act as a professional technical meeting minutes writer. 
-Tone: formal
-Format: Technical meeting summary
-Length:  100 ~ 250
-Tasks:
-- highlight action items and owners
-- highlight the agreements (if any)
-- Use bullet points if needed
-{text}
-CONCISE SUMMARY IN ENGLISH:"""
+instruction = """Extract the meeting summary from the given transcript. Keep your tone formal.
+    Each point should be a written as a separate sentence and do not use bullet points.
+    The entire thing should be presented as a paragraph. Keep in mind this is supposed to be minutes of the meeting.
+    """
 
-prompt = PromptTemplate(
-    template=prompt_template,
-    input_variables=["text"]
-)
+instruction_prompt = ChatPromptTemplate.from_messages([
+        ("system", instruction),
+        MessagesPlaceholder(variable_name="messages")
+])
 
-refine_template = (
-        "Your job is to produce a final summary\n"
-        # "We have provided an existing summary up to a certain point: {existing_answer}\n"
-        "We have the opportunity to make the summary"
-        "with some more context below.\n"
-        "------------\n"
-        "{text}\n"
-        "------------\n"
-        f"Given the new context, produce a summary in English within {target_len} words: following the format"
-        "Participants: <participants>"
-        "Discussed: <Discussed-items>"
-        "Follow-up actions (if any): <a-list-of-follow-up-actions-with-owner-names>"
-        "Highlight agreements and follow-up actions and owners. (if any) and do not write in markdown format!"
-    )
+chained_model = instruction_prompt | llm
 
-refine_prompt = PromptTemplate(
-    input_variables=["text"],
-    template=refine_template
-)
+# # a dictionary for storing the session ID
+store = {}
 
-chain = load_summarize_chain(
-    model,
-    chain_type="refine",
-    return_intermediate_steps=True,
-    question_prompt=prompt,
-    refine_prompt=refine_prompt
-)
+# checks for the presence of already existing session ID
+def get_session_history(session_id: str) -> BaseChatMessageHistory:
+    if session_id not in store:
+        store[session_id] = InMemoryChatMessageHistory()
+    return store[session_id]
 
-def generate_MoM(record: str):
-    texts =  text_splitter.split_text(record)
-    docs = [Document(page_content=text) for text in texts[:]]
-    response = chain({ "input_documents": docs }, return_only_outputs=True)
+with_message_history = RunnableWithMessageHistory(chained_model, get_session_history)
+config = {"configurable": {"session_id": "trial2020"}}
 
-    return response["output_text"]
-
-if __name__ == "__main__":
-    import os
-
-    with open(os.getcwd() + "/record.txt", "r") as file:
-        meet_record = file.read()
+def extract_meeting_info(text_corpus):
+    prompt = "Transcript:\n" + text_corpus
+    summary_response = with_message_history.invoke(
+        [HumanMessage(content=prompt)],
+        config=config
+    ).content.split(".")
+    meeting_summary = [word.strip() for word in summary_response]
     
-    mOm = generate_MoM(meet_record)
-    print(mOm)
+    topic_prompt = """
+    Based on the context of the meeting, extract the topic of the meeting.
+    Return only the topic as a single string.
+    """
+    meeting_topic = with_message_history.invoke(
+        [HumanMessage(content=topic_prompt)],
+        config=config
+    ).content.strip()
+    
+    return {
+        "meeting_topic": meeting_topic,
+        "meeting_summary": meeting_summary
+    }
+
+# Example usage
+if __name__ == "__main__":
+    with open("record.txt", "r") as file:
+        text_corpus = file.read()
+
+    output_dict = extract_meeting_info(text_corpus)
+    
+    print("Topic: ", output_dict['meeting_topic'])
+    print("Summary: ", output_dict['meeting_summary'])
