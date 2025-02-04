@@ -24,7 +24,7 @@ const chartData = [
 export function ChartComponent() {
     return (
         <div className="ml-[40vw]">
-        <Card className="w-[80vw] bg-blue-300 max-w-md mx-auto dark:bg-gray-900  rounded-2xl p-4">
+        <Card className="w-[80vw] bg-blue-300 max-w-md mx-auto dark:bg-gray-900  rounded-10xl p-4">
             <CardHeader className="pb-2">
                 <CardTitle className="text-base font-semibold text-gray-800 dark:text-white">
                     Weekly Meeting Timings(in mins)
@@ -34,7 +34,7 @@ export function ChartComponent() {
                 </CardDescription>
             </CardHeader>
             <CardContent className="p-2">
-                <ResponsiveContainer width="100%" height={200}>
+                <ResponsiveContainer width="100%" height={200} >
                     <LineChart data={chartData} margin={{ top: 5, bottom: 5, left: 10, right: 10 }}>
                         <XAxis
                             dataKey="month"
