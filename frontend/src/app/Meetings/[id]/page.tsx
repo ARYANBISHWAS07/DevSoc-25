@@ -1,13 +1,13 @@
+'use client'
 
-
-import Navbar from "@/app/navbar";
+import Navbartwo from "@/app/components/nav2";
 import { ChartComponent } from "@/contents-ui/graph";
 import { Calendar, Clock, Users } from "lucide-react";
 
 export default function Page() {
     return (
         <>
-            <Navbar />
+            <Navbartwo />
             <div className="flex justify-center items-center h-20">
                 <h1 className="font-bold text-white text-4xl tracking-wide">MINUTES OF MEETING</h1>
             </div>
